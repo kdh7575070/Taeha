@@ -8,9 +8,21 @@
 
 {% block content %}
 <body>
-    안녕~~~
-    <br><a href="{% url 'contestPost' %}">contestPost</a>
-    <br><a href="{% url 'hostPage' %}">hostPage</a>
-    <br><a href="{% url 'participantPage' %}">participantPage</a>
+    <h3>구현해야하는 페이지 링크(임시)</h3>
+    <a href="{% url 'contestPost' %}">contestPost</a><br>
+    <a href="{% url 'hostPage' %}">hostPage</a><br>
+    <a href="{% url 'participantPage' %}">participantPage</a><br>
+    <br>
+
+    <!--검색창-->
+    <div class="search">
+        <form action="" method="POST">
+            {% csrf_token %}
+            검색창
+            <input class="search_box" type="text" placeholder="검색하고 싶은 공모전을 검색하세요." name='shop_name'>
+            <input class="search_btn" type="image" src="" alt="search">
+        </form>
+    </div>
+
 <body>
 {% endblock %}
