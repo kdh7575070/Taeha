@@ -1,1 +1,16 @@
-하이
+{% extends 'base.html' %}
+
+{% block hearder %}
+<head>
+    <title>Home</title>
+</head>
+{% endblock %}
+
+{% block content %}
+<body>
+    안녕~~~
+    <br><a href="{% url 'contestPost' %}">contestPost</a>
+    <br><a href="{% url 'hostPage' %}">hostPage</a>
+    <br><a href="{% url 'participantPage' %}">participantPage</a>
+<body>
+{% endblock %}
