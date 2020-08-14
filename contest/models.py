@@ -15,12 +15,12 @@ class Post(models.Model):
     updated_at = models.DateTimeField(auto_now=True)# 해당 레코드 갱신시 현재 시간 자동저장
 
     category=models.CharField(max_length=225) #분야
-    application_target #응모 대상
+    application_target=models.CharField(max_length=225) #응모 대상
     organizer=models.CharField(max_length=225) #주최기관
-    prize_content = #시상내용
+    prize_content =models.CharField(max_length=225) #시상내용
 
-    prize_type #경품 종류
-    application_form #응모 형태
+    prize_type =models.CharField(max_length=225)#경품 종류
+    application_form=models.CharField(max_length=225) #응모 형태
 
     manager=models.ForeignKey(User, on_delete=models.CASCADE, null=True)#담당자 정보
     
