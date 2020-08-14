@@ -28,8 +28,8 @@ class Post(models.Model):
         User, # User 모델과 Shop 모델을 M : N 관계로 두겠다.
         through='Like', # Like라는 중개 모델을 통해 M : N 관계를 맺는다.
         through_fields=('post', 'user'), # Like에 shop 속성, user 속성을 추가하겠다.
-        related_name='likes' # 1 : N  관계에서 market과 연결된 comment를 가져올 때 comment_set으로 가져왔는데, 
-                            # related_name을 설정하면 shop.like_set이 아니라 shop.likes로 shop과 연결된 like를 가져올 수 있다.
+        related_name='likes' # 1 : N  관계에서 post과 연결된 comment를 가져올 때 comment_set으로 가져왔는데, 
+                            # related_name을 설정하면 shop.like_set이 아니라 post.likes로 post와 연결된 like를 가져올 수 있다.
         )
 
     def __str__(self):
