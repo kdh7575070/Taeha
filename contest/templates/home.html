@@ -9,7 +9,6 @@
 {% block content %}
 <body>
     <h3>구현해야하는 페이지 링크(임시)</h3>
-    <a href="{% url 'contestPost' %}">contestPost</a><br>
     <a href="{% url 'hostPage' %}">hostPage</a><br>
     <a href="{% url 'participantPage' %}">participantPage</a><br>
     <br>
@@ -24,5 +23,23 @@
         </form>
     </div>
 
+    <!--게시글 생성 페이지 이동-->
+    <a href="{% url 'createPost' %}"><button type="button" class="btn btn-dark">게시글 쓰기</button></a>
+
+    <!--게시글 테스트-->
+    {% for post in posts.all %}
+    <br>
+    <div class="container">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">{{post.title}}</h5>
+                <h6 class="card-subtitle mb-2 text-muted">{{post.created_at}}</h6>
+                <p class="card-text">{{post.summary}}</p>
+                <a href="{% url 'contestPost' post.id %}" class="card-link">...more</a>
+            </div>
+        </div>
+    </div>
+    <br>
+    {% endfor %}
 <body>
 {% endblock %}

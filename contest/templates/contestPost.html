@@ -9,5 +9,28 @@
 {% block content %}
 <body>
     공모전 내용 적는 페이지
+
+    <div class="container">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">공모전 제목: {{post.title}}</h5>
+                <h6 class="card-subtitle mb-2 text-muted">내용 : {{post.created_at}}</h6>
+                <p class="card-text">이미지</p>
+                
+                <p class="card-text">공모전 시작 날짜: {{post.start_date}}</p>
+                <p class="card-text">공모전 마감 날짜: {{post.end_date}}</p>
+
+                <p class="card-text">올린 날짜: {{post.created_at}}</p>
+                <p class="card-text">수정한 날짜: {{post.updated_at}}</p>
+
+                <p class="card-text">분야: {{post.category}}</p>
+                <p class="card-text">주최기관: {{post.organizer}}</p>
+                <p class="card-text">경품종류: {{post.total_prize}}</p>
+                <p class="card-text">총 상금: {{post.prize_type}}</p>
+
+                <p class="card-text">담당자 명: {{post.manager.profile.name}}</p>
+            </div>
+        </div>
+    </div>
 <body>
 {% endblock %}

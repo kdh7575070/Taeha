@@ -8,19 +8,16 @@ class Post(models.Model):
     content =models.TextField()
     image=models.ImageField(upload_to='images/')
 
-    start_time=models.DateTimeField()
-    end_time=models.DateTimeField()
+    start_date=models.DateField()
+    end_date=models.DateField()
 
     created_at = models.DateTimeField(auto_now_add=True)# 해당 레코드 생성시 현재 시간 자동저장
     updated_at = models.DateTimeField(auto_now=True)# 해당 레코드 갱신시 현재 시간 자동저장
 
     category=models.CharField(max_length=225) #분야
-    application_target=models.CharField(max_length=225) #응모 대상
     organizer=models.CharField(max_length=225) #주최기관
-    prize_content =models.CharField(max_length=225) #시상내용
-
+    total_prize =models.IntegerField() #총 상금
     prize_type =models.CharField(max_length=225)#경품 종류
-    application_form=models.CharField(max_length=225) #응모 형태
 
     manager=models.ForeignKey(User, on_delete=models.CASCADE, null=True)#담당자 정보
     
@@ -31,9 +28,12 @@ class Post(models.Model):
         related_name='likes' # 1 : N  관계에서 post과 연결된 comment를 가져올 때 comment_set으로 가져왔는데, 
                             # related_name을 설정하면 shop.like_set이 아니라 post.likes로 post와 연결된 like를 가져올 수 있다.
         )
+    
+    def summary(self):
+        return self.content[:100]
 
     def __str__(self):
-        return self.name
+        return self.title
 
     # 몇 개의 like와 연결되어 있는가를 보여준다.
     def like_count(self):
