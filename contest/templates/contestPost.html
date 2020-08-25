@@ -36,8 +36,11 @@
                 <p class="card-text">총 상금: {{post.prize_type}}</p>
 
                 <p class="card-text">담당자 명: {{post.manager.profile.name}}</p>
+
+                <a href="{%url 'delete' post.id %}"><button type="button" class="btn btn-light">Delete</button></a>
+                <a href="{%url 'editPost' post.id %}"><button type="button" class="btn btn-light">Edit</button></a>
             </div>
         </div>
     </div>
-<body>
+</body>
 {% endblock %}

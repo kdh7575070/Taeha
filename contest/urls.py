@@ -7,6 +7,9 @@ urlpatterns = [
     path('hostPage/', contest.views.hostPage, name="hostPage"),
     path('participantPage/', contest.views.participantPage, name="participantPage"),
     path('createPost/', contest.views.createPost, name="createPost"),
-    path('create/', contest.views.create, name="create"),
+    path('contestPost/create/', contest.views.create, name="create"),
+    path('editPost/<int:post_id>', contest.views.edit, name='editPost'),
+    path('contestPost/update/<int:post_id>', contest.views.update, name='update'),
+    path('contestPost/delete/<int:post_id>', contest.views.delete, name='delete'),
 ]
 

@@ -53,6 +53,43 @@ def participantPage(request):
 #게시글 등록 페이지
 def createPost(request):
     return render(request, 'createPost.html')
+
 #U
+def edit(request, post_id):
+    post=get_object_or_404(Post, pk=post_id) #특정 객체 가져오기 (없으면 404에러)
+    return render(request, 'editPost.html', {'post':post})
+
+def update(request, post_id):
+
+    post=get_object_or_404(Post, pk=post_id) #특정 객체 가져오기 (없으면 404에러)
+    post.title=request.POST['title']
+    post.content=request.POST['content']
+    try:
+        post.image = request.FILES['image']
+    except:
+        print('이미지가 없습니다')
+
+    #if( not post.image ):
+        #print()
+
+    post.start_date=request.POST['start_date']
+    post.end_date=request.POST['end_date']
+
+    post.category=request.POST.getlist('category[]')
+    print(post.category)
+    post.organizer=request.POST['organizer']
+    post.total_prize=request.POST['total_prize']
+    post.prize_type=request.POST['prize_type']
+
+    post.manager=request.user
+    post.save()
+
+    return redirect('/contestPost/'+str(post.id))
 
 #D
+
+def delete(request, post_id):
+    post=get_object_or_404(Post, pk=post_id) #특정 객체 가져오기 (없으면 404에러)
+    post.delete()
+
+    return redirect('home')
