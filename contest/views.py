@@ -7,20 +7,21 @@ from .models import *
 #C
 def create(request):
     post=Post()
-    post.title=request.GET['title']
-    post.content=request.GET['content']
-    #post.image = request.FILES['image']
-    if( not post.image ):
-        print()#사진이 없을 경우
+    post.title=request.POST['title']
+    post.content=request.POST['content']
+    post.image = request.FILES['image']
 
-    post.start_date=request.GET['start_date']
-    post.end_date=request.GET['end_date']
+    #if( not post.image ):
+        #print()
+
+    post.start_date=request.POST['start_date']
+    post.end_date=request.POST['end_date']
 
     post.category=request.POST.getlist('category[]')
     print(post.category)
-    post.organizer=request.GET['organizer']
-    post.total_prize=request.GET['total_prize']
-    post.prize_type=request.GET['prize_type']
+    post.organizer=request.POST['organizer']
+    post.total_prize=request.POST['total_prize']
+    post.prize_type=request.POST['prize_type']
 
     post.manager=request.user
     post.save()

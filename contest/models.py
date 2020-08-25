@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 class Post(models.Model):
     title=models.CharField(max_length=225)
     content =models.TextField()
-    image=models.ImageField(upload_to='images/')
+    image=models.ImageField(upload_to='images/', null=True)
 
     start_date=models.DateField()
     end_date=models.DateField()

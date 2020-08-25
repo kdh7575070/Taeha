@@ -16,6 +16,10 @@
                 <h5 class="card-title">공모전 제목: {{post.title}}</h5>
                 <h6 class="card-subtitle mb-2 text-muted">내용 : {{post.created_at}}</h6>
                 <p class="card-text">이미지</p>
+                {% if post.image %}
+                <img src="{{post.image.url}}" alt="">
+                {% endif %}
+
                 
                 <p class="card-text">공모전 시작 날짜: {{post.start_date}}</p>
                 <p class="card-text">공모전 마감 날짜: {{post.end_date}}</p>
