@@ -9,7 +9,10 @@ def create(request):
     post=Post()
     post.title=request.POST['title']
     post.content=request.POST['content']
-    post.image = request.FILES['image']
+    try:
+        post.image = request.FILES['image']
+    except:
+        print('이미지가 없습니다')
 
     #if( not post.image ):
         #print()
