@@ -15,7 +15,7 @@ class Post(models.Model):
     updated_at = models.DateTimeField(auto_now=True)# 해당 레코드 갱신시 현재 시간 자동저장
 
     category=models.CharField(max_length=225) #분야
-    organizer=models.CharField(max_length=225) #주최기관
+    organizer=models.CharField(max_length=225) #주최기관 #빼야함
     total_prize =models.IntegerField() #총 상금
     prize_type =models.CharField(max_length=225)#경품 종류
 
