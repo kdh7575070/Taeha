@@ -8,25 +8,25 @@
 
 {% block content %}
 <body>
-    <form action="{% url 'create' %}" enctype="multipart/form-data" method="POST">
+    <form action="{% url 'update' post.id %}" enctype="multipart/form-data" method="POST">
         {% csrf_token %}
         <h4>제목: </h4>
-        <input type="text" name="title">
+        <input type="text" name="title" value="{{post.title}}">
         <br>
     
         <h4>설명: </h4>
-        <textarea cols=40 rows=10 name="content"></textarea>
+        <textarea cols=40 rows=10 name="content">{{post.content}}</textarea>
         <br>
     
         <label>가게사진 올리기</label>
-        <input class="form-control" type="file" name="image">
+        <input class="form-control" type="file" name="image" value="{{post.image}}">
         <br>
 
         <label>시작 날짜</label>
-        <input class="form-control" type="date" placeholder="start_date" name="start_date">
+        <input class="form-control" type="date" placeholder="start_date" name="start_date" value="{{post.start_date}}">
         <br>
         <label>마감 날짜</label>
-        <input class="form-control" type="date" placeholder="end_date" name="end_date">
+        <input class="form-control" type="date" placeholder="end_date" name="end_date"  value="{{post.end_date}}">
         <br>
         <label>카테고리</label>
         <input type="checkbox" name="category[]" id="category1" value="카테고리1">카테고리1
@@ -47,7 +47,7 @@
         <br>
 
         <label>총 상금액</label>
-        <input type='number' name='total_prize'/>
+        <input type='number' name='total_prize' value="{{post.total_prize}}"/>
 
         <input class="btn btn-outline-dark" type="submit" value="제출하기">
     </form>
