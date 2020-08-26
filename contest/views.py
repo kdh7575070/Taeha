@@ -93,3 +93,17 @@ def delete(request, post_id):
     post.delete()
 
     return redirect('home')
+
+#
+def search(request):
+    post_list=Post.objects.all().order_by('-id')
+    m=request.GET.get('post_name','init')
+
+    if m:
+        posts=post_list.filter(title__icontains=m)
+    
+    return render(request, 'search.html', {
+        'posts':post_list,
+        'post_search': posts,
+        'm':m,
+    })

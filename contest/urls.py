@@ -3,7 +3,6 @@ import contest.views
 
 urlpatterns = [
     path('', contest.views.home, name="home"),
-    path('contestPost/<int:post_id>', contest.views.contestPost, name="contestPost"),
     path('hostPage/', contest.views.hostPage, name="hostPage"),
     path('participantPage/', contest.views.participantPage, name="participantPage"),
     path('contestPost/createPost/', contest.views.createPost, name="createPost"),
@@ -11,5 +10,6 @@ urlpatterns = [
     path('contestPost/editPost/<int:post_id>', contest.views.edit, name='editPost'),
     path('contestPost/update/<int:post_id>', contest.views.update, name='update'),
     path('contestPost/delete/<int:post_id>', contest.views.delete, name='delete'),
+    path('search',contest.views.search, name='search')
 ]
 
