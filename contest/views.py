@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.models import User
+from django.utils import timezone
 from .models import *
 
 import random
@@ -37,13 +38,30 @@ def create(request):
 #홈페이지
 def home(request):
     posts = Post.objects
-    random = random_post()
+    if posts.exists():
+        random = random_post()
+    else:
+        random = None
+
     return render(request,'home.html',{'posts':posts, 'random_post':random})
+        
+
+    
 
 #공모전 게시글
 def contestPost(request, post_id):
     post = get_object_or_404(Post,pk=post_id)
-    return render(request,'contestPost.html' ,{'post':post})
+    user=request.user
+    
+    if post.likes.filter(id=user.id):
+        state="Favorites_Registered"
+    else:
+        state="Favorites_Unregistered"
+
+    comments = Comment.objects.all().filter(post = post)
+
+
+    return render(request,'contestPost.html' ,{'post':post, 'state':state, 'comments':comments})
 
 #공모전 개최자 페이지
 def hostPage(request):
@@ -115,3 +133,36 @@ def random_post():
     post_list=list(Post.objects.all())
     random.shuffle(post_list)
     return post_list[0]
+
+def post_like(request, post_id):
+    user = request.user # 로그인된 유저의 객체를 가져온다.
+    post = get_object_or_404(Post, pk=post_id) # 좋아요 버튼을 누를 글을 가져온다.
+
+    # 이미 좋아요를 눌렀다면 좋아요를 취소, 아직 안눌렀으면 좋아요를 누른다.
+    if post.likes.filter(id=user.id): # 로그인한 user가 현재 post 객체에 좋아요를 눌렀다면
+        post.likes.remove(user) # 해당 좋아요를 없앤다.
+    else: # 아직 좋아요를 누르지 않았다면
+        post.likes.add(user) # 좋아요를 추가한다.
+    
+    return redirect('/contestPost/'+str(post.id))
+
+#댓글 관련
+def comment_create(request, post_id):
+    if request.method == "POST":
+        comment=Comment()
+        comment.body = request.POST['body']
+        comment.c_writer = request.user
+        comment.pub_date = timezone.datetime.now()
+        comment.post = get_object_or_404(Post, pk=post_id)
+        comment.save()
+
+        return redirect('/contestPost/'+str(post_id))
+    else:
+        return redirect('/contestPost/'+str(post_id))
+
+def comment_delete(request, comment_id):
+    comment = get_object_or_404(Comment, pk=comment_id)
+    post_id = comment.post.id
+    comment.delete()
+
+    return redirect('/contestPost/'+str(post_id))
