@@ -7,14 +7,13 @@ urlpatterns = [
     path('participantPage/', contest.views.participantPage, name="participantPage"),
     path('contestPost/createPost/', contest.views.createPost, name="createPost"),
     path('contestPost/create/', contest.views.create, name="create"),
-<<<<<<< Updated upstream
-    path('contestPost/<int:post_id>', contest.views.contestPost, name="contestPost"),
-=======
-    path('contestPost/<int:post_id>', contest.views.create, name="contestPost"),
->>>>>>> Stashed changes
+    path('contestPost/<int:post_id>', contest.views.contestPost, name='contestPost'),
     path('contestPost/editPost/<int:post_id>', contest.views.edit, name='editPost'),
     path('contestPost/update/<int:post_id>', contest.views.update, name='update'),
     path('contestPost/delete/<int:post_id>', contest.views.delete, name='delete'),
-    path('search',contest.views.search, name='search')
+    path('contestPost/post_like/<int:post_id>', contest.views.post_like, name='post_like'),
+    path('search',contest.views.search, name='search'),
+    path('comment_create/<int:post_id>', contest.views.comment_create, name='comment_create'),
+    path('comment_delete/<int:comment_id>', contest.views.comment_delete, name='comment_delete'),
 ]
 

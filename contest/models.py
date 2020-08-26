@@ -43,3 +43,9 @@ class Like(models.Model):
     # Post의 through_fields와 순서가 같아야 한다.
     post = models.ForeignKey(Post, on_delete=models.CASCADE, null=True) # 특정 post가 삭제되면, 그 post의 즐겨찾기 정보 제거
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+
+class Comment(models.Model):
+    pub_date = models.DateTimeField('data published')
+    body = models.TextField(max_length = 500)
+    c_writer = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    post = models.ForeignKey(Post, on_delete = models.CASCADE, null=True)
