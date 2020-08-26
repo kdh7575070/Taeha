@@ -12,6 +12,7 @@
     <h4>검색결과</h4>
     {% for post in post_search.all %}
         <a href="{%url 'contestPost' post.id%}">{{post.title}}</a>
+        <br>
     {% endfor %}
 </body>
 {% endblock %}

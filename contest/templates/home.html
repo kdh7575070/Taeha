@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block header %}
 <head>
@@ -23,8 +24,42 @@
         </form>
     </div>
 
+    <!--랜덤 게시글-->
+    <br>
+    <div class="container">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">{{random_post.title}}</h5>
+                <h6 class="card-subtitle mb-2 text-muted">{{random_post.created_at}}</h6>
+                <p class="card-text"></p>
+
+                
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+              랜덤 게시글
+            </div>
+            {% if random_post.image %}
+            <img src="{{random_post.image.url}}" alt=""/>
+            {% else %}
+            <img src= "{% static 'image/loading_fail.jpg' %}"  alt="image_loading_fail">
+            {% endif %}
+            <div class="card-body">
+              <h5 class="card-title">{{random_post.title}}</h5>
+              <p class="card-text">{{random_post.summary}}</p>
+              <a href="{% url 'contestPost' random_post.id %}" class="btn btn-primary">More</a>
+              <a href="#" 
+            </div>
+          </div>
+    </div>
+    <br>
+
     <!--게시글 생성 페이지 이동-->
+    <br>
     <a href="{% url 'createPost' %}"><button type="button" class="btn btn-dark">게시글 쓰기</button></a>
+    <br>
 
     <!--게시글 테스트-->
     {% for post in posts.all %}

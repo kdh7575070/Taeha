@@ -2,6 +2,8 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.models import User
 from .models import *
 
+import random
+
 # Create your views here.
 
 #C
@@ -35,7 +37,8 @@ def create(request):
 #홈페이지
 def home(request):
     posts = Post.objects
-    return render(request,'home.html',{'posts':posts})
+    random = random_post()
+    return render(request,'home.html',{'posts':posts, 'random_post':random})
 
 #공모전 게시글
 def contestPost(request, post_id):
@@ -107,3 +110,8 @@ def search(request):
         'post_search': posts,
         'm':m,
     })
+
+def random_post():
+    post_list=list(Post.objects.all())
+    random.shuffle(post_list)
+    return post_list[0]
