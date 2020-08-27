@@ -27,8 +27,22 @@
             <br>
             user name:
             <br>
-            <input name="name" type="text" placeholder="name">
-            <br><br>
+            <input name="name" type="text" placeholder="James"">
+            <br>
+            birtday:
+            <br>
+            <input name="birthday" class="form-control" type="date">
+            <br>
+            폰번호(공백없이숫자만):
+            <br>
+            <input name="phone" type="text" pattern="[0-9]{3}[0-9]{4}[0-9]{4}" placeholder="01012341234"/>
+            <br>
+            이메일:
+            <br>
+            <input name="email" type="email" pattern="[a-z0-9._%+-]+@[a-z]+.+[a-z]" placeholder="ab12@gmail.com">
+            <br>
+            
+            <br>
             <input type="submit" class="btn btn-success" value = "sign up">
         </form>
     </div>

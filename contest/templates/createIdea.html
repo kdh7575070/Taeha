@@ -11,19 +11,6 @@
     <form action="{% url 'createI' post.id %}" enctype="multipart/form-data" method="POST">
         {% csrf_token %}
     
-        <!-- <h4>생년월일: </h4>
-        <input class="form-control" type="date" name="birthday">
-        <br>
-    
-        <h4>폰번호(공백없이숫자만) -예외처리: </h4>
-        <input class="form-control" type="text" placeholder="01012341234" name="number">
-        <input type="tel" name="phone" pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}" />
-        <br>
-
-        <h4>이메일</h4>: </h4>
-        <input type="text" name="email">
-        <br> -->
-
         <h4>설명: </h4>
         <textarea cols=40 rows=10 name="content"></textarea>
         <br>

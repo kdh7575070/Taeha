@@ -3,6 +3,7 @@ from django.shortcuts import render,redirect
 from django.contrib.auth.models import User
 from django.contrib import auth
 from django.http import HttpResponse
+from .models import *
 
 # Create your views here.
 def signup(request):
@@ -16,6 +17,9 @@ def signup(request):
                     username=request.POST["userID"],password=request.POST["password1"]
                 )
                 user.profile.name=request.POST['name']
+                user.profile.birthday=request.POST.get('birthday')
+                user.profile.number=request.POST.get('number')
+                user.profile.email=request.POST.get('email')
                 user.save()
                 auth.login(request,user)
                 return redirect('home')
@@ -39,4 +43,5 @@ def logout(request):
     return redirect('home')
 
 def mypage(request):
-    return render(request,'mypage.html')
+    profile = Profile()
+    return render(request,'mypage.html', {'profile':profile})

@@ -12,20 +12,25 @@
     <div class="container">
         <div class="card">
             <div class="card-body">
-                <h6 class="card-subtitle mb-2 text-muted">내용 : {{idea.pub_date}} by{{idea.i_writer.profile.name}}</h6>
                 
-                <!-- <p class="card-text">생년월일: {{idea.start_date}}</p>
-                <p class="card-text">폰번호: {{idea.end_date}}</p>
-                <p class="card-text">이메일: {{idea.end_date}}</p> -->
+                <h4 class="card-text">개인정보</h4>
+                <h5 class="card-text">제출자 : {{idea.i_writer.profile.name}}</h5>
+                <h5 class="card-text">폰번호 : {{idea.i_writer.profile.number}}</h5>
+                <h5 class="card-text">생년월일 : {{idea.i_writer.profile.birthday}}</h5>
+                <h5 class="card-text">이메일 : {{idea.i_writer.profile.email}}</h5>
 
-                <p class="card-text">공모전 주제: {{idea.post.title}}</p>
-
+                <h4 class="card-text">공모정보</h4>
+                <h5 class="card-text">공모전주제: {{idea.post.title}}</h5>
                 <h5 class="card-text">아이디어: {{idea.body}}</h5>
-                <p class="card-text">이미지</p>
+                <p class="card-text">첨부된이미지:
                 {% if idea.image %}
                 <img src="{{idea.image.url}}" alt="">
+                {% else %}
+                첨부된이미지없음
                 {% endif %}
-
+                </p>
+                <br>
+                <h6 class="card-subtitle mb-2 text-muted">내용 : {{idea.pub_date}}</h6>
                 {% if user == idea.i_writer or user.username == 'admin' %}
                 <a href="{%url 'deleteI' post.id idea.id %}"><button type="button" class="btn btn-light">Delete</button></a>
                 {% endif %}

@@ -28,14 +28,17 @@
     <div class="container">
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title">공모전 제목: {{post.title}}</h5>
+                <h3 class="card-title">공모전 제목: {{post.title}}</h3>
                 <h6 class="card-subtitle mb-2 text-muted">내용 : {{post.updated_at}} by {{post.manager.profile.name}}</h6>
-                <p class="card-text">이미지</p>
+                <br>
+                <h5 class="card-text">문의 이메일 : {{post.manager.profile.email}}</h5>
+                <p class="card-text">
                 {% if post.image %}
                 <img src="{{post.image.url}}" alt="">
                 {% else %}
                 <img src= "{% static 'image/loading_fail.jpg' %}"  alt="image_loading_fail">
                 {% endif %}
+                </p>
 
             <!--즐겨찾기 기능-->            
             <div style="display:flex; font-size: 2rem;" class="good">
