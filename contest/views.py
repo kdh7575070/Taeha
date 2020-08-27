@@ -23,13 +23,20 @@ def create(request):
     post.start_date=request.POST['start_date']
     post.end_date=request.POST['end_date']
 
-    post.category=request.POST.getlist('category[]')
-    print(post.category)
     post.organizer=request.POST['organizer']
     post.total_prize=request.POST['total_prize']
     post.prize_type=request.POST['prize_type']
 
     post.manager=request.user
+    post.save()
+
+    checked_categories=request.POST.getlist('category[]')
+    for checked_category in checked_categories:
+        category = Category()
+        category.category_name = checked_category
+        category.post = post
+        category.save()
+        
     post.save()
 
     return redirect('/contestPost/'+str(post.id))
@@ -38,6 +45,7 @@ def create(request):
 #홈페이지
 def home(request):
     posts = Post.objects
+    
     if posts.exists():
         random = random_post()
     else:
@@ -49,7 +57,8 @@ def home(request):
 def contestPost(request, post_id):
     post = get_object_or_404(Post,pk=post_id)
     user=request.user
-    
+    categories = Category.objects.all().filter(post = post)
+
     if post.likes.filter(id=user.id):
         state="Favorites_Registered"
     else:
@@ -58,7 +67,7 @@ def contestPost(request, post_id):
     comments = Comment.objects.all().filter(post = post)
 
 
-    return render(request,'contestPost.html' ,{'post':post, 'state':state, 'comments':comments})
+    return render(request,'contestPost.html' ,{'post':post, 'state':state, 'comments':comments, 'categories':categories})
 
 #공모전 개최자 페이지
 def hostPage(request):
@@ -67,6 +76,10 @@ def hostPage(request):
 #공모전 참여자 페이지
 def participantPage(request):
     return render(request,'participantPage.html')
+
+def likedPage(request):
+    return render(request,'likedPage.html')
+
 
 #게시글 등록 페이지
 def createPost(request):
@@ -93,8 +106,7 @@ def update(request, post_id):
     post.start_date=request.POST['start_date']
     post.end_date=request.POST['end_date']
 
-    post.category=request.POST.getlist('category[]')
-    print(post.category)
+    #post.category=request.POST.getlist('category[]')
     post.organizer=request.POST['organizer']
     post.total_prize=request.POST['total_prize']
     post.prize_type=request.POST['prize_type']
@@ -167,15 +179,32 @@ def comment_delete(request, comment_id):
 # 아이디어관련
 def createI(request, post_id):
     if request.method == "POST":
+        user = request.user
+        post=get_object_or_404(Post, pk=post_id)
+        ideas = Idea.objects.filter(i_writer=user , post=post)
+
+        if ideas.exists():
+            message='이미 참여한 공모전입니다.'
+            categories = Category.objects.all().filter(post = post)
+
+            if post.likes.filter(id=user.id):
+                state="Favorites_Registered"
+            else:
+                state="Favorites_Unregistered"
+
+            comments = Comment.objects.all().filter(post = post)
+            return render(request,'contestPost.html' ,{'post':post, 'state':state, 'comments':comments, 'categories':categories, 'message':message})
+
+
         idea=Idea()
-        idea.i_writer = request.user
+        idea.i_writer = user
         idea.body=request.POST['content']
         try:
             idea.image = request.FILES['image']
         except:
             print('이미지가 없습니다')
         idea.pub_date = timezone.datetime.now()
-        idea.post = get_object_or_404(Post, pk=post_id)
+        idea.post = post
         idea.save()
         return redirect('/contestPost/'+str(post_id)+'/contestIdea/'+str(idea.id))
     else:
@@ -194,3 +223,5 @@ def contestIdea(request, post_id, idea_id):
     return render(request,'contestIdea.html',{'post':post , 'idea':idea} )
 
 #삭제
+def deleteI(request):
+   return render(request, 'createIdea.html', {'post':post})

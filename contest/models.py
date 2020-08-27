@@ -14,7 +14,6 @@ class Post(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)# 해당 레코드 생성시 현재 시간 자동저장
     updated_at = models.DateTimeField(auto_now=True)# 해당 레코드 갱신시 현재 시간 자동저장
 
-    category=models.CharField(max_length=225) #분야
     organizer=models.CharField(max_length=225) #주최기관 #빼야함
     total_prize =models.IntegerField() #총 상금
     prize_type =models.CharField(max_length=225)#경품 종류
@@ -38,6 +37,10 @@ class Post(models.Model):
     # 몇 개의 like와 연결되어 있는가를 보여준다.
     def like_count(self):
         return self.likes.count()
+
+class Category(models.Model):
+    post=models.ForeignKey(Post, on_delete=models.CASCADE, null=True)
+    category_name=models.CharField(max_length=225) #분야
 
 class Like(models.Model):
     # Post의 through_fields와 순서가 같아야 한다.
