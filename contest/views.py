@@ -5,7 +5,7 @@ from .models import *
 
 import random
 
-# Create your views here.
+#공모전관련
 
 #C
 def create(request):
@@ -63,10 +63,9 @@ def contestPost(request, post_id):
         state="Favorites_Registered"
     else:
         state="Favorites_Unregistered"
+    #좋아요버튼
 
     comments = Comment.objects.all().filter(post = post)
-
-
     return render(request,'contestPost.html' ,{'post':post, 'state':state, 'comments':comments, 'categories':categories})
 
 #공모전 개최자 페이지
@@ -77,9 +76,9 @@ def hostPage(request):
 def participantPage(request):
     return render(request,'participantPage.html')
 
+#좋아요 모음 페이지
 def likedPage(request):
     return render(request,'likedPage.html')
-
 
 #게시글 등록 페이지
 def createPost(request):
@@ -87,12 +86,12 @@ def createPost(request):
 
 #U
 def edit(request, post_id):
-    post=get_object_or_404(Post, pk=post_id) #특정 객체 가져오기 (없으면 404에러)
+    post=get_object_or_404(Post, pk=post_id)
     return render(request, 'editPost.html', {'post':post})
 
 def update(request, post_id):
 
-    post=get_object_or_404(Post, pk=post_id) #특정 객체 가져오기 (없으면 404에러)
+    post=get_object_or_404(Post, pk=post_id)
     post.title=request.POST['title']
     post.content=request.POST['content']
     try:
@@ -117,14 +116,14 @@ def update(request, post_id):
     return redirect('/contestPost/'+str(post.id))
 
 #D
-
 def delete(request, post_id):
-    post=get_object_or_404(Post, pk=post_id) #특정 객체 가져오기 (없으면 404에러)
+    post=get_object_or_404(Post, pk=post_id) 
     post.delete()
 
     return redirect('home')
 
-#
+
+#서치관련
 def search(request):
     post_list=Post.objects.all().order_by('-id')
     m=request.GET.get('post_name','init')
@@ -154,6 +153,7 @@ def post_like(request, post_id):
         post.likes.add(user) # 좋아요를 추가한다.
     
     return redirect('/contestPost/'+str(post.id))
+
 
 #댓글 관련
 def comment_create(request, post_id):
@@ -194,7 +194,7 @@ def createI(request, post_id):
 
             comments = Comment.objects.all().filter(post = post)
             return render(request,'contestPost.html' ,{'post':post, 'state':state, 'comments':comments, 'categories':categories, 'message':message})
-
+        #한번만참여하게처리
 
         idea=Idea()
         idea.i_writer = user
@@ -222,6 +222,9 @@ def contestIdea(request, post_id, idea_id):
     # post=get_object_or_404(Post, pk=idea.post.id)
     return render(request,'contestIdea.html',{'post':post , 'idea':idea} )
 
-#삭제
-def deleteI(request):
-   return render(request, 'createIdea.html', {'post':post})
+#아이디어 삭제
+def deleteI(request, post_id, idea_id):
+    idea=get_object_or_404(Idea, pk=idea_id)
+    #post_id=idea.post.id
+    idea.delete()
+    return redirect('/contestPost/'+str(post_id))

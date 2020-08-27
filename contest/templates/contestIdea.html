@@ -18,7 +18,7 @@
                 <p class="card-text">폰번호: {{idea.end_date}}</p>
                 <p class="card-text">이메일: {{idea.end_date}}</p> -->
 
-                <!-- <p class="card-text">연결된 공모전: {{idea.post}}</p> -->
+                <p class="card-text">공모전 주제: {{idea.post.title}}</p>
 
                 <h5 class="card-text">아이디어: {{idea.body}}</h5>
                 <p class="card-text">이미지</p>
@@ -26,7 +26,9 @@
                 <img src="{{idea.image.url}}" alt="">
                 {% endif %}
 
-                
+                {% if user == idea.i_writer or user.username == 'admin' %}
+                <a href="{%url 'deleteI' post.id idea.id %}"><button type="button" class="btn btn-light">Delete</button></a>
+                {% endif %}
 
             </div>
         </div>

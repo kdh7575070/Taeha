@@ -90,6 +90,9 @@
                 <br>
                 {% endif %}
 
+            
+
+
                 {% if user == post.manager or user.username == 'admin' %}
                 <a href="{%url 'delete' post.id %}"><button type="button" class="btn btn-light">Delete</button></a>
                 <a href="{%url 'editPost' post.id %}"><button type="button" class="btn btn-light">Edit</button></a>
@@ -106,13 +109,14 @@
             <h5>{{comment.body}}</h5>
             <h6>댓글 작성자 : {{comment.c_writer}} 
                 {% if comment.c_writer == post.manager %}
-                (공모전 작성자)
+                    (공모전 작성자)
                 {% endif %}
-                작성 날짜 : {{comment.pub_date}}</h6>
+                작성 날짜 : {{comment.pub_date}}
+            </h6>
             {% if comment.c_writer == user %}
-            <a href = "{% url 'comment_delete' comment.id %}">
-                <button type="button" class="btn btn-dark">삭제</button>
-            </a>
+                <a href = "{% url 'comment_delete' comment.id %}">
+                    <button type="button" class="btn btn-dark">삭제</button>
+                </a>
             {% endif %}
         </div>
     </div>
