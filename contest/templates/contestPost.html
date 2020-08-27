@@ -14,8 +14,7 @@
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">공모전 제목: {{post.title}}</h5>
-                <h6 class="card-subtitle mb-2 text-muted">내용 : {% if post.updated_at %} {(post.updated_at}}
-                    {% else %} {{post.created_at}} {% endif %} by{{post.manager.profile.name}}</h6>
+                <h6 class="card-subtitle mb-2 text-muted">내용 : {{post.updated_at}} by {{post.manager.profile.name}}</h6>
                 <p class="card-text">이미지</p>
                 {% if post.image %}
                 <img src="{{post.image.url}}" alt="">
@@ -68,7 +67,7 @@
                 
                 {% if user.is_authenticated %}
                 <br>
-                <a href="{% url 'createIdea' %}"><button type="button" class="btn btn-dark">아이디어 제출</button></a>
+                <a href="{% url 'createIdea' post.id %}"><button type="button" class="btn btn-dark">아이디어 제출</button></a>
                 <br>
                 {% endif %}
 

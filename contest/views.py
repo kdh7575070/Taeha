@@ -34,23 +34,6 @@ def create(request):
 
     return redirect('/contestPost/'+str(post.id))
 
-def createI(request):
-    idea=Idea()
-    idea.name=request.POST['name']
-    idea.nuber=request.POST['number']
-    idea.email=request.POST['email']
-
-    idea.content=request.POST['content']
-    try:
-        idea.image = request.FILES['image']
-    except:
-        print('이미지가 없습니다')
-
-    idea.manager=request.user
-    idea.save()
-
-    return render(request,'contestIdea.html', {'idea':idea})
-
 #R
 #홈페이지
 def home(request):
@@ -88,14 +71,6 @@ def participantPage(request):
 #게시글 등록 페이지
 def createPost(request):
     return render(request, 'createPost.html')
-
-#아이디어 등록 페이지
-def createIdea(request):
-    return render(request, 'createIdea.html')
-
-#아이디어 게시글
-def contestIdea(request):
-    return render(request,'contestIdea.html')
 
 #U
 def edit(request, post_id):
@@ -172,12 +147,11 @@ def post_like(request, post_id):
 def comment_create(request, post_id):
     if request.method == "POST":
         comment=Comment()
-        comment.body = request.POST['body']
         comment.c_writer = request.user
+        comment.body = request.POST['body']
         comment.pub_date = timezone.datetime.now()
         comment.post = get_object_or_404(Post, pk=post_id)
         comment.save()
-
         return redirect('/contestPost/'+str(post_id))
     else:
         return redirect('/contestPost/'+str(post_id))
@@ -188,3 +162,35 @@ def comment_delete(request, comment_id):
     comment.delete()
 
     return redirect('/contestPost/'+str(post_id))
+
+
+# 아이디어관련
+def createI(request, post_id):
+    if request.method == "POST":
+        idea=Idea()
+        idea.i_writer = request.user
+        idea.body=request.POST['content']
+        try:
+            idea.image = request.FILES['image']
+        except:
+            print('이미지가 없습니다')
+        idea.pub_date = timezone.datetime.now()
+        idea.post = get_object_or_404(Post, pk=post_id)
+        idea.save()
+        return redirect('/contestPost/'+str(post_id)+'/contestIdea/'+str(idea.id))
+    else:
+        return redirect('/contestPost/'+str(post_id)+'/contestIdea/'+str(idea.id))
+
+#아이디어 등록 페이지
+def createIdea(request, post_id):
+    post=get_object_or_404(Post, pk=post_id)
+    return render(request, 'createIdea.html', {'post':post})
+
+#아이디어 게시글
+def contestIdea(request, post_id, idea_id):
+    idea=get_object_or_404(Idea, pk=idea_id)
+    post=get_object_or_404(Post, pk=post_id)
+    # post=get_object_or_404(Post, pk=idea.post.id)
+    return render(request,'contestIdea.html',{'post':post , 'idea':idea} )
+
+#삭제

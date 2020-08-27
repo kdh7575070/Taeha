@@ -51,13 +51,9 @@ class Comment(models.Model):
     post = models.ForeignKey(Post, on_delete = models.CASCADE, null=True)
 
 class Idea(models.Model):
-    name=models.CharField(max_length=25)
-    number=models.CharField(max_length=11)
-    email=models.CharField(max_length=50)
-    content=models.TextField()
+    pub_date = models.DateTimeField('data published')
+    body=models.TextField()
     image=models.ImageField(upload_to='imagesI/', null=True)
-
-    manager=models.ForeignKey(User, on_delete=models.CASCADE, null=True)#작성자 정보
     
-    created_at = models.DateTimeField(auto_now_add=True)# 해당 레코드 생성시 현재 시간 자동저장
-    updated_at = models.DateTimeField(auto_now=True)# 해당 레코드 갱신시 현재 시간 자동저장
+    i_writer=models.ForeignKey(User, on_delete=models.CASCADE, null=True)#작성자 정보
+    post = models.ForeignKey(Post, on_delete = models.CASCADE, null=True)#연결된포스트
