@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User #작성자정보 받아오기위해서
 
 # Create your models here.
 class Post(models.Model):
@@ -19,7 +19,7 @@ class Post(models.Model):
     total_prize =models.IntegerField() #총 상금
     prize_type =models.CharField(max_length=225)#경품 종류
 
-    manager=models.ForeignKey(User, on_delete=models.CASCADE, null=True)#담당자 정보
+    manager=models.ForeignKey(User, on_delete=models.CASCADE, null=True)#작성자 정보
     
     likes =models.ManyToManyField(
         User, # User 모델과 Shop 모델을 M : N 관계로 두겠다.
@@ -49,3 +49,15 @@ class Comment(models.Model):
     body = models.TextField(max_length = 500)
     c_writer = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     post = models.ForeignKey(Post, on_delete = models.CASCADE, null=True)
+
+class Idea(models.Model):
+    name=models.CharField(max_length=25)
+    number=models.CharField(max_length=11)
+    email=models.CharField(max_length=50)
+    content=models.TextField()
+    image=models.ImageField(upload_to='imagesI/', null=True)
+
+    manager=models.ForeignKey(User, on_delete=models.CASCADE, null=True)#작성자 정보
+    
+    created_at = models.DateTimeField(auto_now_add=True)# 해당 레코드 생성시 현재 시간 자동저장
+    updated_at = models.DateTimeField(auto_now=True)# 해당 레코드 갱신시 현재 시간 자동저장

@@ -34,6 +34,23 @@ def create(request):
 
     return redirect('/contestPost/'+str(post.id))
 
+def createI(request):
+    idea=Idea()
+    idea.name=request.POST['name']
+    idea.nuber=request.POST['number']
+    idea.email=request.POST['email']
+
+    idea.content=request.POST['content']
+    try:
+        idea.image = request.FILES['image']
+    except:
+        print('이미지가 없습니다')
+
+    idea.manager=request.user
+    idea.save()
+
+    return render(request,'contestIdea.html', {'idea':idea})
+
 #R
 #홈페이지
 def home(request):
@@ -43,10 +60,7 @@ def home(request):
     else:
         random = None
 
-    return render(request,'home.html',{'posts':posts, 'random_post':random})
-        
-
-    
+    return render(request,'home.html',{'posts':posts, 'random_post':random})  
 
 #공모전 게시글
 def contestPost(request, post_id):
@@ -74,6 +88,14 @@ def participantPage(request):
 #게시글 등록 페이지
 def createPost(request):
     return render(request, 'createPost.html')
+
+#아이디어 등록 페이지
+def createIdea(request):
+    return render(request, 'createIdea.html')
+
+#아이디어 게시글
+def contestIdea(request):
+    return render(request,'contestIdea.html')
 
 #U
 def edit(request, post_id):

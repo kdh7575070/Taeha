@@ -35,6 +35,23 @@
                 </li>
             </ul>
     
+            <!--검색창-->
+            <div class="search">
+                <form action="{% url 'search' %}" method="GET">
+                    <!--{% csrf_token %}-->
+                    검색창
+                    <input class="search_box" type="text" style="margin-right: 3px" placeholder="검색하고 싶은 공모전을 검색하세요." name='post_name'>
+                    <input class="search_btn" type="image" style="margin-right: 10px" src="" alt="search">
+                </form>
+            </div>
+            
+            {% if user.is_authenticated %}
+            <!--게시글 생성 페이지 이동-->
+            <br>
+            <a href="{% url 'createPost' %}"><button class="btn btn-dark" type="button" style="margin-right: 10px" >게시글 쓰기</button></a>
+            <br>
+            {% endif %}
+
             {% if user.is_authenticated %}
                 Hello, {{user.get_username}}
                 <a href ="{% url 'mypage' %}" class="btn btn-success" type="submit" style="margin-left: 10px;">Mypage</a>

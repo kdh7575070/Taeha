@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block header %}
+<head>
+    <title>contestIdea</title>
+</head>
+{% endblock %}
+
+{% block content %}
+<body>
+    아이디어확인
+    <div class="container">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">이름: {{idea.name}}</h5>
+                <h6 class="card-subtitle mb-2 text-muted">내용 : {% if idea.updated_at %} {{idea.updated_at}}
+                    {% else %} {{idea.created_at}} {% endif %} by{{idea.manager.profile.name}}</h6>
+                
+                <p class="card-text">생년월일: {{idea.start_date}}</p>
+                <p class="card-text">폰번호: {{idea.end_date}}</p>
+                <p class="card-text">이메일: {{idea.end_date}}</p>
+
+                <p class="card-text">올린 날짜: {{idea.created_at}}</p>
+                <p class="card-text">수정한 날짜: {{idea.updated_at}}</p>
+
+                <p class="card-text">연결된 공모전</p>
+
+                <p class="card-text">이미지</p>
+                {% if idea.image %}
+                <img src="{{idea.image.url}}" alt="">
+                {% endif %}
+
+                <!-- {% if user == idea.manager or user.username == 'admin' %}
+                <a href="{%url 'deleteI' ???.id %}"><button type="button" class="btn btn-light">Delete</button></a>
+                {% endif %} -->
+
+            </div>
+        </div>
+    </div>
+</body>
+{% endblock %}

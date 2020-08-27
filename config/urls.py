@@ -20,8 +20,8 @@ from django.conf import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('contest.urls')),
-    path('account/',include('account.urls')),
+    path('', include('contest.urls')), #콘테스트 url은 디폴트(공백)로 두겠다
+    path('account/',include('account.urls')), #account의 url은 account/를 생성한다
 ]
 
-urlpatterns+=static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
+urlpatterns+=static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT) #미디어 파일 루트 연결

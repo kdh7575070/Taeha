@@ -14,15 +14,6 @@
     <a href="{% url 'participantPage' %}">participantPage</a><br>
     <br>
 
-    <!--검색창-->
-    <div class="search">
-        <form action="{% url 'search' %}" method="GET">
-            <!--{% csrf_token %}-->
-            검색창
-            <input class="search_box" type="text" placeholder="검색하고 싶은 공모전을 검색하세요." name='post_name'>
-            <input class="search_btn" type="image" src="" alt="search">
-        </form>
-    </div>
 
     <!--랜덤 게시글-->
     {% if random_post %}
@@ -56,11 +47,6 @@
           </div>
     </div>
     {% endif %}
-    <br>
-
-    <!--게시글 생성 페이지 이동-->
-    <br>
-    <a href="{% url 'createPost' %}"><button type="button" class="btn btn-dark">게시글 쓰기</button></a>
     <br>
 
     <!--게시글 테스트-->
