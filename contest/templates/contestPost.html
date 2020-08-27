@@ -12,9 +12,16 @@
 
 {% block content %}
 <body>
+    <!-- 오류 메세지 테스트-->
     {% if message %}
+    <div id="message" style="display:none;">{{message}}</div>
     <script>
-        alert('이미 참여한 공모전입니다.')
+        var messageVar = document.getElementById("message").innerHTML;
+        function Alert()
+        {
+            alert(messageVar)
+        }
+        Alert()
     </script>
     {% endif %}
 
