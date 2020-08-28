@@ -17,10 +17,13 @@ def signup(request):
                     username=request.POST["userID"],password=request.POST["password1"]
                 )
                 user.profile.name=request.POST['name']
-                user.profile.birthday=request.POST.get('birthday')
-                user.profile.number=request.POST.get('number')
-                user.profile.email=request.POST.get('email')
-                user.save()
+                user.profile.birthday=request.POST['birthday']
+                user.profile.number=request.POST['number']
+                user.profile.email=request.POST['email']
+                if user.profile.name and user.profile.birthday and user.profile.number and user.profile.email:
+                    user.save()
+                else:
+                    return HttpResponse('모든필드를채워주세요!')
                 auth.login(request,user)
                 return redirect('home')
     return render(request,'signup.html')
@@ -43,5 +46,4 @@ def logout(request):
     return redirect('home')
 
 def mypage(request):
-    profile = Profile()
-    return render(request,'mypage.html', {'profile':profile})
+    return render(request,'mypage.html')
