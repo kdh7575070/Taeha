@@ -16,7 +16,7 @@ urlpatterns = [
     path('contestPost/post_like/<int:post_id>', contest.views.post_like, name='post_like'),
     
     #Search
-    path('search',contest.views.search, name='search'),
+    path('search/',contest.views.search, name='search'),
 
     #Comment
     path('contestPost/<int:post_id>/comment_create',contest.views.comment_create, name='comment_create'),

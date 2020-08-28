@@ -76,10 +76,22 @@ def contestPost(request, post_id):
 
 #공모전 개최자 페이지
 def hostPage(request):
+    user = request.user
+    if user.is_active:
+        posts = Post.objects.filter(manager=user) 
+        return render(request, 'hostPage.html', {'posts':posts})
     return render(request,'hostPage.html')
 
-#공모전 참여자 페이지
+#공모참여자 페이지
 def participantPage(request):
+    user = request.user
+    if user.is_active:
+        ideas = Idea.objects.filter(i_writer=user)
+        post_list=[]
+        for idea in ideas:
+            if idea.post not in post_list:
+                post_list.append(Post.objects.filter())
+        return render(request, 'participantPage.html', {'post_list':post_list})
     return render(request,'participantPage.html')
 
 #좋아요 모음 페이지

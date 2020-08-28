@@ -8,7 +8,16 @@
 
 {% block content %}
 <body>
-    공모전 개최자가 보는
-    게시글 목록 페이지
+    {% if user.is_active %}
+        <div class="like">
+                {{user}}님이 올린 공모전들 :
+                {% for post in posts %}
+                    {% if post.manager == user %}
+                        <br>
+                        <a href="{% url 'contestPost' post.id %}">{{post.title}}</a>
+                    {% endif %}
+                {% endfor %}
+        </div>
+    {% endif %}
 </body>
 {% endblock %}
