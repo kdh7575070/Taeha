@@ -54,8 +54,12 @@ class Comment(models.Model):
 
 class Idea(models.Model):
     pub_date = models.DateTimeField('data published')
+    title=models.CharField(max_length=225)
     body=models.TextField()
     image=models.ImageField(upload_to='imagesI/', null=True)
     
     i_writer=models.ForeignKey(User, on_delete=models.CASCADE, null=True)#작성자 정보
     post = models.ForeignKey(Post, on_delete = models.CASCADE, null=True)#연결된포스트
+
+    def summary(self):
+        return self.body[:100]

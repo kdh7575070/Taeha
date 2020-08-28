@@ -55,8 +55,8 @@ def home(request):
 
 #공모전 게시글
 def contestPost(request, post_id):
-    post = get_object_or_404(Post,pk=post_id)
     user=request.user
+    post = get_object_or_404(Post,pk=post_id)
     categories = Category.objects.all().filter(post = post)
 
     if post.likes.filter(id=user.id):
@@ -64,8 +64,14 @@ def contestPost(request, post_id):
     else:
         state="Favorites_Unregistered"
     #좋아요버튼
-
+    
     comments = Comment.objects.all().filter(post = post)
+    
+    participate_idea = Idea.objects.filter(post = post, i_writer = user).first()
+
+    if participate_idea is not None:
+        return render(request,'contestPost.html' ,{'post':post, 'state':state, 'comments':comments, 'categories':categories, 'participate_idea': participate_idea})
+
     return render(request,'contestPost.html' ,{'post':post, 'state':state, 'comments':comments, 'categories':categories})
 
 #공모전 개최자 페이지
@@ -84,8 +90,10 @@ def likedPage(request):
         return render(request, 'likedPage.html', {'likes':likes})
     return render(request,'likedPage.html')
 
-def allIdea(request):
-    return render(request,'allIdea.html')
+def allIdea(request, post_id):
+    post = get_object_or_404(Post, pk=post_id)
+    ideas = Idea.objects.filter(post=post)
+    return render(request,'allIdea.html', {'post':post,'ideas':ideas})
 
 #게시글 등록 페이지
 def createPost(request):
@@ -204,6 +212,7 @@ def createI(request, post_id):
 
         idea=Idea()
         idea.i_writer = user
+        idea.title=request.POST['title']
         idea.body=request.POST['content']
         try:
             idea.image = request.FILES['image']

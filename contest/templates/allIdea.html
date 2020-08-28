@@ -9,6 +9,17 @@
 
 {% block content %}
 <body>
-
+    <div class="like">
+                {{user}}님이 올린 {{post.title}} 공모전의 아이디어들 :
+                <br>
+                {% for idea in ideas %}
+                    <br>
+                    아이디어 제목 : <a href="{% url 'contestIdea' post.id idea.id %}">{{idea.title}}</a>
+                    <br>
+                    아이디어 내용 : {{idea.summary}}
+                    <br>
+                    <br>
+                {% endfor %}
+        </div>
 </body>
 {% endblock %}

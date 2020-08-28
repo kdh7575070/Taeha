@@ -88,9 +88,16 @@
                 <p class="card-text">작성자 명: {{post.manager.profile.name}}</p>
                 
                 {% if user.is_authenticated %}
-                <br>
-                <a href="{% url 'createIdea' post.id %}"><button type="button" class="btn btn-dark">아이디어 제출</button></a>
-                <br>
+                    {% if post.manager != user %}
+                    <br>
+                    <a href="{% url 'createIdea' post.id %}"><button type="button" class="btn btn-dark">아이디어 제출</button></a>
+                        {% if participate_idea %}
+                        <a href="{% url 'contestIdea' post.id participate_idea.id%}"><button type="button" class="btn btn-dark">참여한 아이디어</button></a>
+                        {% endif%}
+                    {% else %}
+                    <a href="{% url 'allIdea' post.id%}"> <button type="button" class="btn btn-dark">공모전에 등록된 아이디어들 </button></a>
+                    <br>
+                    {% endif %}
                 {% endif %}
 
             
