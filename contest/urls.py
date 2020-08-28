@@ -5,7 +5,7 @@ urlpatterns = [
     path('', contest.views.home, name="home"),
     path('hostPage/', contest.views.hostPage, name="hostPage"),
     path('participantPage/', contest.views.participantPage, name="participantPage"),
-    path('likedPage/<int:post_id>', contest.views.likedPage, name='likedPage'),
+    path('likedPage/', contest.views.likedPage, name='likedPage'),
 
     path('contestPost/createPost/', contest.views.createPost, name="createPost"),
     path('contestPost/create/', contest.views.create, name="create"),
@@ -25,6 +25,7 @@ urlpatterns = [
     #Idea
     path('contestPost/<int:post_id>/createIdea', contest.views.createIdea, name='createIdea'),
     path('contestPost/<int:post_id>/createI', contest.views.createI, name='createI'),
+    path('contestPost/<int:post_id>/allIdea', contest.views.allIdea, name='allIdea'),
     path('contestPost/<int:post_id>/contestIdea/<int:idea_id>', contest.views.contestIdea, name='contestIdea'),
     path('contestPost/<int:post_id>/deleteI/<int:idea_id>', contest.views.deleteI, name='deleteI'),
 ]

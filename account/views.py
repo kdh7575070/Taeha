@@ -5,6 +5,7 @@ from django.contrib import auth
 from django.http import HttpResponse
 from .models import *
 
+
 # Create your views here.
 def signup(request):
     if request.method == "POST":

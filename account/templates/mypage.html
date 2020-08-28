@@ -9,8 +9,25 @@
 {% block content %}
 <body>
     user name: {{user.profile.name}}
+    참여자
     <br>
     birtday: {{user.profile.birtday}}
+    <a href="{% url 'likedPage' %}">관심있는 공모전 목록</a>
+    <br>
+    <a href="{% url 'participantPage' %}">참여한 공모전 목록</a>
+    <br>
+    <br>
+    공모전 개최자
+    <br>
+    <a href="{% url 'hostPage' %}">올린 공모전 목록</a>
+    <br>
+    <!--공모전에 등록된 아이디어들-->
+    <br>
+
+
+    user name: {{profile.name}} 
+    <br>
+    birtday: 
     <br>
     폰번호: {{user.profile.number}}
     <br>

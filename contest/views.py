@@ -78,7 +78,14 @@ def participantPage(request):
 
 #좋아요 모음 페이지
 def likedPage(request):
+    user = request.user
+    if user.is_active:
+        likes=Like.objects.select_related()
+        return render(request, 'likedPage.html', {'likes':likes})
     return render(request,'likedPage.html')
+
+def allIdea(request):
+    return render(request,'allIdea.html')
 
 #게시글 등록 페이지
 def createPost(request):
@@ -136,7 +143,6 @@ def search(request):
         'post_search': posts,
         'm':m,
     })
-
 def random_post():
     post_list=list(Post.objects.all())
     random.shuffle(post_list)
