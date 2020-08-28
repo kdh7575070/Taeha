@@ -9,16 +9,15 @@
 {% block content %}
 <body>
     {% if user.is_active %}
-        <!--{% if user.username != "admin" %}-->
         <div class="like">
-                <i class="fa fa-star"> </i>&nbsp{{user}}님이 즐겨찾는 가게 :
+                <i class="fa fa-star"> </i>&nbsp{{user}}님이 관심있는 공모전들 :
                 {% for like in likes %}
-                    {% if a.user == user %}
+                    {% if like.user == user %}
+                        <br>
                         <a href="{% url 'contestPost' like.post.id %}">{{like.post.title}}</a>
                     {% endif %}
                 {% endfor %}
         </div>
-        <!--{% endif %}-->
     {% endif %}
 </body>
 {% endblock %}
