@@ -68,7 +68,6 @@ def contestPost(request, post_id):
     comments = Comment.objects.all().filter(post = post)
     
     participate_idea = Idea.objects.filter(post = post, i_writer = user).first()
-
     if participate_idea is not None:
         return render(request,'contestPost.html' ,{'post':post, 'state':state, 'comments':comments, 'categories':categories, 'participate_idea': participate_idea})
 
@@ -91,7 +90,7 @@ def participantPage(request):
         post_list=[]
         for idea in ideas:
             if idea.post not in post_list:
-                post_list.append(Post.objects.filter())
+                post_list.append(idea.post)
         return render(request, 'participantPage.html', {'post_list':post_list})
     return render(request,'participantPage.html')
 
