@@ -20,7 +20,7 @@ urlpatterns = [
 
     #Comment
     path('contestPost/<int:post_id>/comment_create',contest.views.comment_create, name='comment_create'),
-    path('contestPost/<int:post_id>/comment_delete',contest.views.comment_delete, name='comment_delete'),
+    path('contestPost/<int:post_id>/comment_delete/<int:comment_id>',contest.views.comment_delete, name='comment_delete'),
 
     #Idea
     path('contestPost/<int:post_id>/createIdea', contest.views.createIdea, name='createIdea'),

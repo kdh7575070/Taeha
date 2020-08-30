@@ -124,7 +124,7 @@
                 작성 날짜 : {{comment.pub_date}}
             </h6>
             {% if comment.c_writer == user %}
-                <a href = "{% url 'comment_delete' comment.id %}">
+                <a href = "{% url 'comment_delete' post.id comment.id %}">
                     <button type="button" class="btn btn-dark">삭제</button>
                 </a>
             {% endif %}

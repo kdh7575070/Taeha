@@ -194,7 +194,7 @@ def comment_create(request, post_id):
     else:
         return redirect('/contestPost/'+str(post_id))
 
-def comment_delete(request, comment_id):
+def comment_delete(request, post_id, comment_id):
     comment = get_object_or_404(Comment, pk=comment_id)
     post_id = comment.post.id
     comment.delete()
