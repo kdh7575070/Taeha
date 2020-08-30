@@ -155,6 +155,7 @@ def search(request):
     post_list=Post.objects.all().order_by('-id')
     m=request.GET.get('post_name','init')
 
+    posts=None
     if m:
         posts=post_list.filter(title__icontains=m)
     
