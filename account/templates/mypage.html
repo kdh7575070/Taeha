@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block hearder %}
+{% block header %}
 <head>
     <title>My page</title>
 </head>
@@ -8,30 +8,21 @@
 
 {% block main %}
 <main>
-    user name: {{user.profile.name}}
-    참여자
-    <br>
-    birtday: {{user.profile.birtday}}
     <a href="{% url 'likedPage' %}">관심있는 공모전 목록</a>
     <br>
     <a href="{% url 'participantPage' %}">참여한 공모전 목록</a>
     <br>
-    <br>
-    공모전 개최자
-    <br>
     <a href="{% url 'hostPage' %}">올린 공모전 목록</a>
     <br>
-    
-
-
-    user name: {{profile.name}} 
     <br>
-    birtday: 
+    user name: {{user.profile.name}} 
+    <br>
+    birtday: {{user.profile.birthday}} 
     <br>
     폰번호: {{user.profile.number}}
     <br>
     이메일: {{user.profile.email}}
     <br>
-        
+    <a href="{% url 'edituser' %}"><button type="button" class="btn btn-dark">회원정보수정</button></a>
 </main>
 {% endblock %}

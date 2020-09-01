@@ -48,3 +48,15 @@ def logout(request):
 
 def mypage(request):
     return render(request,'mypage.html')
+
+def edituser(request):
+    return render(request,'edituser.html')
+
+def updateuser(request):
+    user = request.user
+    user.profile.name=request.POST['name']
+    user.profile.birthday=request.POST['birthday']
+    user.profile.number=request.POST['number']
+    user.profile.email=request.POST['email']
+    user.save()
+    return render(request, 'mypage.html')
