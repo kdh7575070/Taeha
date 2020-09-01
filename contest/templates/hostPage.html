@@ -6,8 +6,8 @@
 </head>
 {% endblock %}
 
-{% block content %}
-<body>
+{% block main %}
+<main>
     {% if user.is_active %}
         <div class="like">
                 {{user}}님이 올린 공모전들 :
@@ -19,5 +19,5 @@
                 {% endfor %}
         </div>
     {% endif %}
-</body>
+</main>
 {% endblock %}

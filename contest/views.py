@@ -23,7 +23,6 @@ def create(request):
     post.start_date=request.POST['start_date']
     post.end_date=request.POST['end_date']
 
-    post.organizer=request.POST['organizer']
     post.total_prize=request.POST['total_prize']
     post.prize_type=request.POST['prize_type']
 
@@ -114,7 +113,19 @@ def createPost(request):
 #U
 def edit(request, post_id):
     post=get_object_or_404(Post, pk=post_id)
-    return render(request, 'editPost.html', {'post':post})
+    post_categories = Category.objects.all().filter(post=post)
+    post_category_list = []
+    for post_category in post_categories :
+        post_category_list.append(post_category.category_name)
+
+    categories = ['카테고리1', '카테고리2','카테고리3']
+    prize_types = ['경품종류1','경품종류2','경품종류3']
+
+    return render(request, 'editPost.html', {'post':post,
+                                            'post_category_list':post_category_list,
+                                            'categories':categories,
+                                            'prize_types':prize_types
+                                            })
 
 def update(request, post_id):
 
@@ -132,12 +143,22 @@ def update(request, post_id):
     post.start_date=request.POST['start_date']
     post.end_date=request.POST['end_date']
 
-    #post.category=request.POST.getlist('category[]')
-    post.organizer=request.POST['organizer']
     post.total_prize=request.POST['total_prize']
     post.prize_type=request.POST['prize_type']
 
     post.manager=request.user
+    categories = Category.objects.filter(post = post)
+    for category in categories:
+        category.delete()
+    #post.save()
+
+    checked_categories=request.POST.getlist('category[]')
+    for checked_category in checked_categories:
+        category = Category()
+        category.category_name = checked_category
+        category.post = post
+        category.save()
+        
     post.save()
 
     return redirect('/contestPost/'+str(post.id))
@@ -164,6 +185,18 @@ def search(request):
         'post_search': posts,
         'm':m,
     })
+
+def category(request, c_name):
+    #TODO HTML에서 받을 때 {% url '' category_name = 넣을 변수명 %} 테스트 해보기
+    category_posts=[]
+    category_list =Category.objects.all().filter(category_name=c_name)
+    for category in category_list:
+        if category.post not in category_posts: 
+            category_posts.append(category.post)
+            
+    return render(request,'search.html' , {'category_posts': category_posts})
+
+
 def random_post():
     post_list=list(Post.objects.all())
     random.shuffle(post_list)

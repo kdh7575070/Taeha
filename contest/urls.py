@@ -17,6 +17,7 @@ urlpatterns = [
     
     #Search
     path('search/',contest.views.search, name='search'),
+    path('category/<str:c_name>',contest.views.category, name='category'),
 
     #Comment
     path('contestPost/<int:post_id>/comment_create',contest.views.comment_create, name='comment_create'),

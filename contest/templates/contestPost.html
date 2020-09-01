@@ -10,8 +10,8 @@
 </head>
 {% endblock %}
 
-{% block content %}
-<body>
+{% block main %}
+<main>
     <!-- 오류 메세지 테스트-->
     {% if message %}
     <div id="message" style="display:none;">{{message}}</div>
@@ -81,9 +81,8 @@
                     {{category.category_name}}
                 {% endfor %}
                 </p>
-                <p class="card-text">주최기관: {{post.organizer}}</p>
-                <p class="card-text">경품종류: {{post.total_prize}}</p>
-                <p class="card-text">총 상금: {{post.prize_type}}</p>
+                <p class="card-text">경품종류: {{post.prize_type}}</p>
+                <p class="card-text">총 상금: {{post.total_prize}}</p>
 
                 <p class="card-text">작성자 명: {{post.manager.profile.name}}</p>
                 
@@ -139,5 +138,5 @@
         <textarea cols =125 rows=2 name="body"></textarea>
         <input class = "btn btn-primary" type="submit" value="댓글 달기!">
     </form>
-</body>
+</main>
 {% endblock %}

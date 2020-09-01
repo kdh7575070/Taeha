@@ -6,8 +6,8 @@
 </head>
 {% endblock %}
 
-{% block content %}
-<body>
+{% block main %}
+<main>
     공모전 참여가자 보는 참여한 게시글 목록
     {% if user.is_active %}
         <div class="like">
@@ -18,5 +18,5 @@
                 {% endfor %}
         </div>
     {% endif %}
-</body>
+</main>
 {% endblock %}

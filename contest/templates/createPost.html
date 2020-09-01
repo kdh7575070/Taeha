@@ -6,8 +6,8 @@
 </head>
 {% endblock %}
 
-{% block content %}
-<body>
+{% block main %}
+<main>
     <form action="{% url 'create' %}" enctype="multipart/form-data" method="POST">
         {% csrf_token %}
         <h4>제목: </h4>
@@ -36,13 +36,7 @@
             <input type="checkbox" name="category[]" id="category3" value="카테고리3">카테고리3
         </div>
         <br>
-
-        <label>주최기관</label>
-        <input type="radio" name="organizer" id="organizer1" value="주최기관1">주최기관1
-        <input type="radio" name="organizer" id="organizer2" value="주최기관2">주최기관2
-        <input type="radio" name="organizer" id="organizer3" value="주최기관3">주최기관3
-        <br>
-
+        
         <label>경품종류</label>
         <input type="radio" name="prize_type" id="prize_type1" value="경품종류1">경품종류1
         <input type="radio" name="prize_type" id="prize_type2" value="경품종류2">경품종류2
@@ -54,6 +48,6 @@
 
         <input class="btn btn-outline-dark" type="submit" value="제출하기" >
     </form>
-</body>
+</main>
 
 {% endblock %}

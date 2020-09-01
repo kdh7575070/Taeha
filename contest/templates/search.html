@@ -7,13 +7,21 @@
 </head>
 {% endblock %}
 
-{% block content %}
-<body>
+{% block main %}
+<main>
     <h4>검색결과</h4>
     {% for post in post_search.all %}
         <a href="{%url 'contestPost' post.id%}">{{post.title}}</a>
         <br>
     {% endfor %}
-</body>
+
+    {% if category_posts %}
+        <h4>카테고리 검색 결과</h4>
+        {% for category_post in category_posts %}
+        <a href="{%url 'contestPost' category_post.id%}">{{category_post.title}}</a>
+        <br>
+        {% endfor %}
+    {% endif %}
+</main>
 {% endblock %}
 

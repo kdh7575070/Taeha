@@ -6,8 +6,8 @@
 </head>
 {% endblock %}
 
-{% block content %}
-<body>
+{% block main %}
+<main>
     <form action="{% url 'createI' post.id %}" enctype="multipart/form-data" method="POST">
         {% csrf_token %}
     
@@ -25,6 +25,6 @@
 
         <input class="btn btn-outline-dark" type="submit" value="제출하기">
     </form>
-</body>
+</main>
 
 {% endblock %}
