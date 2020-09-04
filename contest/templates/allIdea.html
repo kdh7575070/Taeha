@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block header %}
+<head>
+    <title>All Idea</title>
+    <link rel="stylesheet" href="{% static 'css/allIdea.css' %}">
+</head>
+
+{% endblock %}
+
+{% block main %}
+<main>
+    <div class="like">
+                <div id="id1"> "{{user}}"님이 올린 "{{post.title}}" 공모전의 아이디어 </div>
+                <br>
+                {% for idea in ideas %}
+                    <br>
+                    <div class="box">
+                        <div id="id2">아이디어 제목 : <a href="{% url 'contestIdea' post.id idea.id %}">{{idea.title}}</a></div>
+                        <br>
+                        <div id="id3">아이디어 내용 : {{idea.summary}}</div>
+                    </div>
+                    <br>
+                    <br>
+                {% endfor %}
+        </div>
+        
+</main>
+{% endblock %}
+

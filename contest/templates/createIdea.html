@@ -1,0 +1,105 @@
+{% extends 'base.html' %}
+
+{% block header %}
+
+<head>
+    <title>createIdea</title>
+
+    <style>
+        input:focus,
+        textarea:focus {
+            outline: none;
+        }
+
+        #title {
+            font-size: 30px;
+            border: 0;
+            margin: 40px;
+            padding: 30px;
+            border-bottom: 1px solid #012840
+        }
+
+        #article {
+            border: none;
+            margin: 40px;
+            padding: 30px;
+            border-bottom: 1px solid #012840
+        }
+
+        #image {
+            margin: 40px;
+        }
+
+        #submit {
+            margin: 40px;
+            float: right;
+        }
+
+        .upload label {
+            display: inline-block;
+            padding: .5em .75em;
+            color: black;
+            font-size: inherit;
+            line-height: normal;
+            vertical-align: middle;
+            background-color: #fff;
+            cursor: pointer;
+            border: 1px solid #012840;
+            border-radius: .25em;
+            -webkit-transition: background-color 0.2s;
+            transition: background-color 0.2s;
+        }
+
+        .upload label:hover {
+            background-color: #012840;
+            color: white;
+        }
+
+        .upload label:active {
+            background-color: #0583F2;
+            color: white;
+        }
+
+        .upload input[type="file"] {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            border: 0;
+        }
+    </style>
+</head>
+{% endblock %}
+
+{% block main %}
+<main>
+    <form action="{% url 'createI' post.id %}" enctype="multipart/form-data" method="POST">
+        {% csrf_token %}
+
+        <div id="title">
+            <input type="text" name="title" placeholder="아이디어 제목" style="width:100%; border: none;">
+            <br>
+        </div>
+
+        <div id="article">
+            <textarea rows=40 name="content" placeholder="아이디어에 대한 설명을 구체적으로 작성해주세요."
+                style="width:100%; border: none;"></textarea>
+        </div>
+
+        <div id="image" class="upload">
+            <label for="upload">사진 업로드</>
+                <input class="form-control" id="upload" type="file" name="image" style="border: 1px solid #012840;">
+                <br>
+        </div>
+
+        <div id="submit">
+            <input class="btn btn-outline-dark" type="submit" value="제출하기">
+        </div>
+
+    </form>
+</main>
+
+{% endblock %}
