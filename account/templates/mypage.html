@@ -1,28 +1,54 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block header %}
 <head>
     <title>My page</title>
+    <link rel="stylesheet" href="{% static 'css/mypage.css' %}">
 </head>
 {% endblock %}
 
 {% block main %}
 <main>
-    <a href="{% url 'likedPage' %}">관심있는 공모전 목록</a>
-    <br>
-    <a href="{% url 'participantPage' %}">참여한 공모전 목록</a>
-    <br>
-    <a href="{% url 'hostPage' %}">올린 공모전 목록</a>
-    <br>
-    <br>
-    user name: {{user.profile.name}} 
-    <br>
-    birtday: {{user.profile.birthday}} 
-    <br>
-    폰번호: {{user.profile.number}}
-    <br>
-    이메일: {{user.profile.email}}
-    <br>
-    <a href="{% url 'edituser' %}"><button type="button" class="btn btn-dark">회원정보수정</button></a>
+    <div class="container-fluid">
+        <h1 class="mt-4">&nbsp{{user}}님의 마이 페이지</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item active">회원정보</li>
+            <!-- <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+            <li class="breadcrumb-item active">Charts</li> -->
+        </ol>
+
+        <div class="card">
+            <div class="card-body">
+                <h3 class="card-title">회원 이름: {{user.profile.name}}</h3>
+                <h5 class="card-text">생년월일 : {{user.profile.birtday}}</h5>
+                <h5 class="card-text">휴대폰 번호 : {{user.profile.number}}</h5>
+                <h5 class="card-text">이메일 : {{user.profile.email}}</h5>
+            </div>
+        </div>
+
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item"><a href="{% url 'likedPage' %}">관심있는 공모전</a></li>
+        </ol>
+
+        <div class="row">
+        </div>
+
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item"><a href="{% url 'participantPage' %}">참여한 공모전</a></li>
+        </ol>
+
+        <div class="row">
+        </div>
+
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item"><a href="{% url 'hostPage' %}">올린 공모전 목록</a></li>
+        </ol>
+
+        <div class="row">
+        </div>
+
+        <a href="{% url 'edituser' %}"><button type="button" class="btn btn-dark">회원정보수정</button></a>
+    </div>
 </main>
 {% endblock %}

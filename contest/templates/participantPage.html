@@ -8,15 +8,33 @@
 
 {% block main %}
 <main>
-    공모전 참여가자 보는 참여한 게시글 목록
-    {% if user.is_active %}
-        <div class="like">
-                {{user}}님이 참여한 공모전 :
-                {% for post in post_list %}
-                        <br>
-                        <a href="{% url 'contestPost' post.id %}">{{post.title}}</a>
-                {% endfor %}
+    <div class="container-fluid">
+        <h1 class="mt-4">&nbsp{{user}}님이 참여한 페이지</h1>
+        <ol class="breadcrumb mb-4">
+            <!-- <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+            <li class="breadcrumb-item active">Charts</li> -->
+        </ol>
+        <div class="row">
+            {% for post in post_list %}
+                <br>
+                <div class="col-lg-6">
+                    <div class="card bg text-black mb-4">
+                        <div class="card-body">
+                            <h2>{{post.title}}</h2>
+                            <h5>{{post.summary}}</h5>
+                            <div class="small text-black">총 상금 : {{post.total_prize}}</div>
+                            <div class="small text-black">공모전 시작 일자 : {{post.start_date}}</div>
+                            <div class="small text-black">공모전 종료 일자 : {{post.end_date}}</div>
+                        </div>
+                        <div class="card-footer d-flex align-items-center justify-content-between">
+                            <a class="small text-black stretched-link" href="{% url 'contestPost' post.id %}">View Details</a>
+                            <div class="small text-black"><i class="fas fa-angle-right"></i></div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+            
         </div>
-    {% endif %}
+    </div>
 </main>
 {% endblock %}
