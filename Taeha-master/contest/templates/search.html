@@ -15,10 +15,13 @@
 <main>
     <br><h4>검색결과</h4><br>
     {% for post in post_search.all %}
-        <a href="{%url 'contestPost' post.id%}"><div id="post">{{post.title}}</div></a>
+        <div id="post_c">
+        <div id="post_m">
+        <a href="{%url 'contestPost' post.id%}" style="text-decoration: none;"><div id="post"><img src="/static/image/loading_fail.jpg" style="width: 20rem; height: 20rem;"<div id="post_item"><b>{{post.title}}</b></div></div></a>
         <br>
     {% endfor %} 
-    
+        </div>  
+        </div>  
     {% if category_posts %}
         <br><h4>카테고리 검색 결과</h4><br>
         <div id="category_c">
