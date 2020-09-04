@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block header %}
+<head>
+    <title>Search</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'contest/css/search.css' %}">
+    <style>
+         div:hover{color: #0583F2;}
+    </style>
+</head>
+{% endblock %}
+
+{% block main %}
+<main>
+    <br><h4>검색결과</h4><br>
+    {% for post in post_search.all %}
+        <a href="{%url 'contestPost' post.id%}"><div id="post">{{post.title}}</div></a>
+        <br>
+    {% endfor %} 
+    
+    {% if category_posts %}
+        <br><h4>카테고리 검색 결과</h4><br>
+        <div id="category_c">
+        <div id="category_m">
+        {% for category_post in category_posts %}
+        <br>
+        <a href="{%url 'contestPost' category_post.id%}" style="text-decoration: none;"><div id="category"><img src="/static/image/loading_fail.jpg" style="width: 20rem; height: 20rem;"><div id="category_item"><b>{{category_post.title}}</b></div></div></a>
+        <br> 
+        {% endfor %}
+        </div>
+        </div> 
+    {% endif %}
+</main>
+{% endblock %}
+

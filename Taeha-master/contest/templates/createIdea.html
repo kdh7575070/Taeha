@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block header %}
+<head>
+    <title>createIdea</title>
+</head>
+{% endblock %}
+
+{% block main %}
+<main>
+    <form action="{% url 'createI' post.id %}" enctype="multipart/form-data" method="POST">
+        {% csrf_token %}
+    
+        <h4>제목: </h4>
+        <input type="text" name="title">
+        <br>
+
+        <h4>설명: </h4>
+        <textarea cols=40 rows=10 name="content"></textarea>
+        <br>
+
+        <label>사진</label>
+        <input class="form-control" type="file" name="image">
+        <br>
+
+        <input class="btn btn-outline-dark" type="submit" value="제출하기">
+    </form>
+</main>
+
+{% endblock %}
