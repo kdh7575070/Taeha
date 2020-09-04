@@ -1,0 +1,12 @@
+.container {
+    margin-top : 3%;
+}
+
+.card {
+    width : 100%;
+    height : 100%;
+    margin-top : 5%;
+    border : 4px solid #012840
+    !important;
+}
+
