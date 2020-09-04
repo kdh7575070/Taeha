@@ -296,6 +296,7 @@ input[type=checkbox] {
 textarea {
   overflow: auto;
   resize: vertical;
+  
 }
 
 fieldset {
@@ -2130,6 +2131,7 @@ select.form-control[size], select.form-control[multiple] {
 
 textarea.form-control {
   height: auto;
+  
 }
 
 .form-group {
