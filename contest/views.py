@@ -81,7 +81,6 @@ def hostPage(request):
     return render(request,'hostPage.html')
 
 #공모참여자 페이지
-#오류해결해야함
 def participantPage(request):
     user = request.user
     if user.is_active:
