@@ -52,7 +52,7 @@
             {% endfor %}
         </div>
 
-        <ul class="pagination justify-content-center"">
+        <ul class="pagination justify-content-end">
             {% if like_posts.has_previous %}
             <li class="page-item">
                 <a class="page-link" href="?like_page={{like_posts.previous_page_number}}">Previous</a>
@@ -109,7 +109,7 @@
             {% endfor %}
         </div>
 
-        <ul class="pagination justify-content-center"">
+        <ul class="pagination justify-content-end"">
             {% if participant_posts.has_previous %}
             <li class="page-item">
                 <a class="page-link" href="?participant_page={{participant_posts.previous_page_number}}">Previous</a>
@@ -166,7 +166,7 @@
             {% endfor %}
         </div>
 
-        <ul class="pagination justify-content-center"">
+        <ul class="pagination justify-content-end">
             {% if host_posts.has_previous %}
             <li class="page-item">
                 <a class="page-link" href="?host_page={{host_posts.previous_page_number}}">Previous</a>
