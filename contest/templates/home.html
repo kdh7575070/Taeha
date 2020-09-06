@@ -4,6 +4,7 @@
 {% block header %}
 <head>
     <title>Home</title>
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
 </head>
 {% endblock %}
 
@@ -27,11 +28,13 @@
             <div class="card-header">
               랜덤 게시글
             </div>
+            <div id='photocell'>
             {% if random_post.image %}
-            <img src="{{random_post.image.url}}" alt=""/>
+            <img src="{{random_post.image.url}}" alt="" id="photo">
             {% else %}
-            <img src= "{% static 'image/loading_fail.jpg' %}"  alt="image_loading_fail">
+            <img src= "{% static 'image/loading_fail.jpg' %}"  alt="image_loading_fail" id="photo">
             {% endif %}
+            </div>
             <div class="card-body">
               <h5 class="card-title">{{random_post.title}}</h5>
               <p class="card-text">{{random_post.summary}}</p>

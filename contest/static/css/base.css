@@ -4,6 +4,9 @@
 .sb-sidenav-dark {
     background-color: #012840;
 }
+.sb-sidenav-footer {
+    background-color: #012840 !important;
+}
 .test
 {
     font-family: sans-serif;
