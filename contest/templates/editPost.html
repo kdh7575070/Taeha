@@ -1,57 +1,83 @@
 {% extends 'base.html' %}
 
 {% block header %}
+
+{% load static %}
+
 <head>
     <title>editPost</title>
+    <link rel="stylesheet" href="{% static 'css/createPost.css' %}">
 </head>
 {% endblock %}
 
 {% block main %}
 <main>
-    <form action="{% url 'update' post.id %}" enctype="multipart/form-data" method="POST">
-        {% csrf_token %}
-        <h4>제목: </h4>
-        <input type="text" name="title" value="{{post.title}}">
-        <br>
-    
-        <h4>설명: </h4>
-        <textarea cols=40 rows=10 name="content">{{post.content}}</textarea>
-        <br>
-    
-        <label>가게사진 올리기</label>
-        <input class="form-control" type="file" name="image" value="{{post.image}}">
-        <br>
+    <div id="title">
+        <form action="{% url 'update' post.id %}" enctype="multipart/form-data" method="POST">
+            {% csrf_token %}
 
+            <input type="text" name="title" value="{{post.title}}" placeholder="공모전 제목"
+                style="width:100%; border: none;">
+            <br>
+    </div>
+
+    <div id="article">
+        <textarea rows=40 name=" content" placeholder="공모전에 대한 설명을 구체적으로 작성해주세요."
+            style="width:100%; border: none;">{{post.content}}</textarea>
+        <br>
+    </div>
+
+    <div id="image" class="upload">
+        <label for="upload">사진 업로드</>
+            <input class="form-control" id="upload" type="file" name="image" value="{{post.image}}"
+                style="border: 1px solid #012840;">
+            <br>
+    </div>
+
+    <div id="date">
         <label>시작 날짜</label>
-        <input class="form-control" type="date" placeholder="start_date" name="start_date" value="{{post.start_date}}">
+        <input class="form-control" type="date" placeholder="start_date" name="start_date" value="{{post.start_date}}"
+            style="border: 1px solid #012840;">
         <br>
         <label>마감 날짜</label>
-        <input class="form-control" type="date" placeholder="end_date" name="end_date"  value="{{post.end_date}}">
+        <input class="form-control" type="date" placeholder="end_date" name="end_date" value="{{post.end_date}}"
+            style="border: 1px solid #012840;">
         <br>
+    </div>
+
+    <div id="category" class="category">
         <label>카테고리</label>
         {% for category in categories %}
-            {% if category in post_category_list %}
-                <input type="checkbox" name="category[]" id="{{category}}" value="{{category}}" checked="checked">{{category}}
-            {% else %}
-                <input type="checkbox" name="category[]" id="{{category}}" value="{{category}}">{{category}}
-            {% endif %}
+        {% if category in post_category_list %}
+        <input type="checkbox" class="category" name="category[]" id="{{category}}" value="{{category}}"
+            checked="checked">{{category}}
+        {% else %}
+        <input type="checkbox" class="category" name="category[]" id="{{category}}" value="{{category}}">{{category}}
+        {% endif %}
         {% endfor %}
         <br>
+    </div>
 
+    <div id="prize">
         <label>경품종류</label>
         {% for prize_type in prize_types %}
-            {% if prize_type == post.prize_type %}
-                <input type="radio" name="prize_type" id="{{prize_type}}" value="{{prize_type}}" checked="checked">{{prize_type}}
-            {% else %}
-                <input type="radio" name="prize_type" id="{{prize_type}}" value="{{prize_type}}" >{{prize_type}}
-            {% endif %}
+        {% if prize_type == post.prize_type %}
+        <input type="radio" class="prize" name="prize_type" id="{{prize_type}}" value="{{prize_type}}"
+            checked="checked">{{prize_type}}
+        {% else %}
+        <input type="radio" class="prize" name="prize_type" id="{{prize_type}}" value="{{prize_type}}">{{prize_type}}
+        {% endif %}
         {% endfor %}
         <br>
 
         <label>총 상금액</label>
-        <input type='number' name='total_prize' value="{{post.total_prize}}"/>
+        <input type='number' name='total_prize' value="{{post.total_prize}}" style="margin-left: 50px;">
+    </div>
 
+    <div id="submit">
         <input class="btn btn-outline-dark" type="submit" value="제출하기">
+    </div>
+
     </form>
 </main>
 
