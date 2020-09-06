@@ -2,6 +2,8 @@
 {% load static %}
 
 {% block header %}
+h
+
 <head>
     <title>Home</title>
     <link rel="stylesheet" href="{% static 'css/home.css' %}">
@@ -13,52 +15,62 @@
     <!--랜덤 게시글-->
     {% if random_post %}
     <br>
-    <div class="container">
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">{{random_post.title}}</h5>
-                <h6 class="card-subtitle mb-2 text-muted">{{random_post.created_at}}</h6>
-                <p class="card-text"></p>
+    <div id="layoutSidenav_content">
+        <div class="container-fluid">
+            <div class="container">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">{{random_post.title}}</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">{{random_post.created_at}}</h6>
+                        <p class="card-text"></p>
 
-                
-            </div>
-        </div>
 
-        <div class="card">
-            <div class="card-header">
-              랜덤 게시글
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        랜덤 게시글
+                    </div>
+                    <div id='photocell'>
+                        {% if random_post.image %}
+                        <img src="{{random_post.image.url}}" alt="" id="photo">
+                        {% else %}
+                        <img src="{% static 'image/loading_fail.jpg' %}" alt="image_loading_fail" id="photo">
+                        {% endif %}
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">{{random_post.title}}</h5>
+                        <p class="card-text">{{random_post.summary}}</p>
+                        <a href="{% url 'contestPost' random_post.id %}" class="btn btn-primary">More</a>
+                    </div>
+                </div>
             </div>
-            <div id='photocell'>
-            {% if random_post.image %}
-            <img src="{{random_post.image.url}}" alt="" id="photo">
-            {% else %}
-            <img src= "{% static 'image/loading_fail.jpg' %}"  alt="image_loading_fail" id="photo">
             {% endif %}
-            </div>
-            <div class="card-body">
-              <h5 class="card-title">{{random_post.title}}</h5>
-              <p class="card-text">{{random_post.summary}}</p>
-              <a href="{% url 'contestPost' random_post.id %}" class="btn btn-primary">More</a>
-            </div>
-        </div>
-    </div>
-    {% endif %}
-    <br>
+            <br>
 
-    <!--게시글 테스트-->
-    {% for post in posts.all %}
-    <br>
-    <div class="container">
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">{{post.title}}</h5>
-                <h6 class="card-subtitle mb-2 text-muted">{{post.created_at}}</h6>
-                <p class="card-text">{{post.summary}}</p>
-                <a href="{% url 'contestPost' post.id %}" class="card-link">...more</a>
+            <!--게시글 테스트-->
+            <br>
+            <div class="container">
+                <h1 class="my-4">88한 심바의 공모전's</h1>
+                {% for post in posts.all %}
+                <div class="row">
+                    <div class="col-lg-4 col-sm-6 portfolio-item">
+                        <div class="card h-100">
+                            <a href="{% url 'contestPost' post.id %}"><img class="card-img-top"
+                                    src="{% static 'image/loading_fail.jpg' %}" alt=""></a>
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    <a href="{% url 'contestPost' post.id %}">{{post.title}}</a></h5>
+                                <h6 class="card-subtitle mb-2 text-muted">{{post.created_at}}</h6>
+                                <p class="card-text">{{post.summary}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                {% endfor %}
             </div>
         </div>
-    </div>
-    <br>
-    {% endfor %}
 </main>
 {% endblock %}

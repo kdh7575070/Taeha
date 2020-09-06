@@ -24,19 +24,15 @@
                         <div class="col-lg-7">
                             <div class="card shadow-lg border-0 rounded-lg mt-5">
                                 <div class="card-header">
-                                    <h3 class="text-center font-weight-light my-4">Create Account</h3>
+                                    <h3 class="text-center font-weight-light my-4">계정 만들기</h3>
                                 </div>
                                 <div class="card-body">
                                     <form method="POST" action="{% url 'signup' %}">
                                         {% csrf_token %}
-                                        <div class="form-row">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label class="small mb-1" for="inputName">이름</label>
-                                                    <input class="form-control py-4" name="name" type="text" values=""
-                                                        placeholder="이름">
-                                                </div>
-                                            </div>
+                                        <div class="form-group">
+                                            <label class="small mb-1" for="inputName">이름</label>
+                                            <input class="form-control py-4" name="name" type="text" values=""
+                                                placeholder="이름">
                                         </div>
                                         <div class="form-group">
                                             <label class="small mb-1" for="inputEmailAddress">User ID</label>
@@ -58,29 +54,33 @@
                                                     <input class="form-control py-4" name="password2" values=""
                                                         type="password" placeholder="Confirm password">
                                                 </div>
+                                            </div>
+                                            <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label class="small mb-1" for="inputEmailAddress">생년월일</label>
                                                     <input class="form-control py-4" name="birthday" type="date"
                                                         values="" placeholder="생년월일을 입력하세요">
                                                 </div>
+                                            </div>
+                                            <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label class="small mb-1" for="inputEmailAddress">전화번호(공백없이)</label>
                                                     <input class="form-control py-4" name="number"
                                                         pattern="[0-9]{3}[0-9]{4}[0-9]{4}" placeholder="01012341234">
                                                 </div>
-                                                <div class="form-group">
-                                                    <label class="small mb-1" for="inputEmailAddress">이메일</label>
-                                                    <input class="form-control py-4" name="email""
-                                                        pattern="[a-z0-9._%+-]+@[a-z]+.+[a-z]" placeholder="kd13@naver.com">
-                                                </div>
                                             </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="small mb-1" for="inputEmailAddress">이메일</label>
+                                            <input class="form-control py-4" name="email"
+                                                pattern="[a-z0-9._%+-]+@[a-z]+.+[a-z]" placeholder="kd13@naver.com">
                                         </div>
                                         <div class="form-group mt-4 mb-0"><input class="btn btn-primary btn-block"
                                                 type="submit" value="Create Account"></input></div>
                                     </form>
                                 </div>
                                 <div class="card-footer text-center">
-                                    <div class="small"><a href='{% url "login" %}'>Have an account? Go to login</a>
+                                    <div class="small"><a href='{% url "login" %}'>이미 계정이 있으신가요? 로그인 하러가기</a>
                                     </div>
                                 </div>
                             </div>
