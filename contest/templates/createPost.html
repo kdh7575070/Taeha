@@ -8,12 +8,12 @@
 <head>
     <title>createPost</title>
     <link rel="stylesheet" href="{% static 'css/createPost.css' %}">
-    <script src="../static/js/createPost.js"></script>
 </head>
 {% endblock %}
 
 {% block main %}
 <main>
+    <script src="../js/createPost.js"></script>
     <div id="title">
         <form action="{% url 'create' %}" enctype="multipart/form-data" method="POST">
             {% csrf_token %}
