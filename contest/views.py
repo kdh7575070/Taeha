@@ -243,6 +243,8 @@ def createI(request, post_id):
         ideas = Idea.objects.filter(i_writer=user , post=post)
 
         if ideas.exists():
+            participate_idea = ideas.first()
+
             message='이미 참여한 공모전입니다.'
             categories = Category.objects.all().filter(post = post)
 
@@ -252,7 +254,7 @@ def createI(request, post_id):
                 state="Favorites_Unregistered"
 
             comments = Comment.objects.all().filter(post = post)
-            return render(request,'contestPost.html' ,{'post':post, 'state':state, 'comments':comments, 'categories':categories, 'message':message})
+            return render(request,'contestPost.html' ,{'post':post, 'state':state, 'comments':comments, 'categories':categories, 'message':message, 'participate_idea':participate_idea})
         #한번만참여하게처리
 
         idea=Idea()
