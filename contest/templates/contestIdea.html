@@ -6,7 +6,38 @@
 <head>
     <title>contestIdea</title>
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
-    <link rel="stylesheet" href="{% static 'css/contestIdea.css' %}">
+    <style>
+        .container{
+            margin-top: 3%
+        }
+
+        .card{
+            width: 100%;
+            height: 100%;
+            margin-top: 1%;
+            border: 1px solid #012840 !important;
+        }
+
+        .photocell{
+            width:100%;
+            height:100%;
+            border: solid;
+        }
+
+        #photo{
+            max-width:100%;
+            max-height:100%;
+            width:auto;
+            height:auto;
+        }
+
+        #buttons{
+            color:#012840;
+            background-color: #F2F2F2 !important;
+            border: solid  white !important;
+            margin-top: 1%;
+        }
+    </style>
 </head>
 {% endblock %}
 
@@ -15,44 +46,36 @@
     <div class="container">
         <div class="card">
             <div class="card-body">
-                <div class="card" style="width : 15%">
-                    <div class="card-body1">
-                        <center>
-                            <h4 class="card-text" style="font-size : 30px"><b>개인 정보</b></h4>
-                        </center>
-                    </div>
-
-                </div>
-
+                <h4 class="card-text" style="width: 13.5%;
+                border: 1px solid #012840 !important;
+                border-radius: 0.25rem;
+                padding: 1%;">개인 정보</h4>
                 <h5 class="card-text">제출자 : {{idea.i_writer.profile.name}}</h5>
                 <h5 class="card-text">연락처 : {{idea.i_writer.profile.number}}</h5>
                 <h5 class="card-text">생년월일 : {{idea.i_writer.profile.birthday}}</h5>
                 <h5 class="card-text">이메일 : {{idea.i_writer.profile.email}}</h5><br>
 
-                <div class="card" style="width : 15%">
-                    <div class="card-body1">
-                        <center>
-                            <h4 class="card-text" style="font-size : 30px"><b>공모 정보</b></h4>
-                        </center>
-                    </div>
-                </div>
-
+                <h4 class="card-text" style="width: 13.5%;
+                border: 1px solid #012840 !important;
+                border-radius: 0.25rem;
+                padding: 1%;">공모 정보</h4>
                 <h5 class="card-text">공모전 주제 : {{idea.post.title}}</h5>
                 <h5 class="card-text">아이디어 : {{idea.body}}</h5>
                 <p class="card-text">첨부된 이미지 :
-                    {% if idea.image %}
-                    <img src="{{idea.image.url}}" alt="">
-                    {% else %}
-                    첨부된 이미지 없음
-                    {% endif %}
+                    <div id='photocell'>
+                        {% if idea.image %}
+                        <img src="{{idea.image.url}}" alt="" id="photo">
+                        {% else %}
+                        첨부된 이미지 없음
+                        {% endif %}
+                    </div>
                 </p>
                 <br>
                 <h6 class="card-subtitle mb-2 text-muted">내용 : {{idea.pub_date}}</h6>
                 {% if user == idea.i_writer or user.username == 'admin' %}
-                <a href="{%url 'deleteI' post.id idea.id %}"><button type="button"
-                        class="btn btn-light">Delete</button></a>
+                <a href="{%url 'deleteI' post.id idea.id %}">
+                    <button type="button" class="btn btn-light" id="buttons">삭제</button></a>
                 {% endif %}
-
             </div>
         </div>
     </div>

@@ -32,13 +32,13 @@
                 <br>
                 <h5 class="card-text">문의 이메일 : {{post.manager.profile.email}}</h5>
                 <p class="card-text">
-                <div id='photocell'>
-                    {% if post.image %}
-                    <img src="{{post.image.url}}" alt="" id="photo">
-                    {% else %}
-                    <img src="{% static 'image/loading_fail.jpg' %}" alt="image_loading_fail" id="photo">
-                    {% endif %}
-                </div>
+                    <div id='photocell'>
+                        {% if post.image %}
+                        <img src="{{post.image.url}}" alt="" id="photo">
+                        {% else %}
+                        <img src="{% static 'image/loading_fail.jpg' %}" alt="image_loading_fail" id="photo">
+                        {% endif %}
+                    </div>
                 </p>
 
                 <!--즐겨찾기 기능-->
@@ -89,23 +89,23 @@
                 {% if user.is_authenticated %}
                 {% if post.manager != user %}
                 <br>
-                    <a href="{% url 'createIdea' post.id %}"><button type="button" class="btn btn-dark" id="buttons">아이디어 제출</button></a>
-                    {% if participate_idea %}
-                    <a href="{% url 'contestIdea' post.id participate_idea.id%}"><button type="button"
-                            class="btn btn-dark" id="buttons">참여한 아이디어</button></a>
-                    {% endif%}
-                    {% else %}
-                    <a href="{% url 'allIdea' post.id%}"> <button type="button" class="btn btn-dark" id="buttons">공모전에 등록된 아이디어들
-                        </button></a>
-                    <br>
-                    {% endif %}
-                    {% endif %}
+                <a href="{% url 'createIdea' post.id %}"><button type="button" class="btn btn-dark" id="buttons">아이디어 제출</button></a>
+                {% if participate_idea %}
+                <a href="{% url 'contestIdea' post.id participate_idea.id%}"><button type="button"
+                        class="btn btn-dark" id="buttons">참여한 아이디어</button></a>
+                {% endif%}
+                {% else %}
+                <a href="{% url 'allIdea' post.id%}"> <button type="button" class="btn btn-dark" id="buttons">공모전에 등록된 아이디어들
+                    </button></a>
+                <br>
+                {% endif %}
+                {% endif %}
 
-                    {% if user == post.manager or user.username == 'admin' %}
-                    <a href="{%url 'delete' post.id %}"><button type="button" class="btn btn-light" id="buttons">Delete</button></a>
-                    <a href="{%url 'editPost' post.id %}"><button type="button" class="btn btn-light" id="buttons">Edit</button></a>
-                    {% endif %}
-                </div>
+                {% if user == post.manager or user.username == 'admin' %}
+                <a href="{%url 'delete' post.id %}"><button type="button" class="btn btn-light" id="buttons">삭제</button></a>
+                <a href="{%url 'editPost' post.id %}"><button type="button" class="btn btn-light" id="buttons">수정</button></a>
+                {% endif %}
+            </div>
         </div>
 
 
