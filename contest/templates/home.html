@@ -20,45 +20,58 @@
 
 </head>
 
+
 <header>
-    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-        <ol class="carousel-indicators">
-            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-        </ol>
-        <div class="carousel-inner" role="listbox">
-            <!-- Slide One - Set the background image for this slide in the line below -->
-            <div class="carousel-item active" style="background-image: url({{random_post.image.url}})">
-                <div class="carousel-caption d-none d-md-block">
-                    <h3>{{random_post.title}}</h3>
-                    <p>{{random_post.summary}}</p>
-                    <a href="{% url 'contestPost' random_post.id %}">...more</a>
+    <div class="container-fluid">
+        {% if random_post %}
+        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+            </ol>
+            <div class="carousel-inner" role="listbox">
+                <!-- Slide One - Set the background image for this slide in the line below -->
+                <div class="carousel-item active" style="background-image: url({{random_post.image.url}})">
+                    <div class="carousel-caption d-none d-md-block">
+                        {% if random_post.image %}
+                        <h3>{{random_post.title}}</h3>
+                        <p>{{random_post.summary}}</p>
+                        <a href="{% url 'contestPost' random_post.id %}">...more</a>
+                    </div>
                 </div>
-            </div>
-            <!-- Slide Two - Set the background image for this slide in the line below -->
-            <div class="carousel-item" style="background-image: url('http://placehold.it/1900x1080')">
-                <div class="carousel-caption d-none d-md-block">
-                    <h3>Second Slide</h3>
-                    <p>This is a description for the second slide.</p>
+                <!-- Slide Two - Set the background image for this slide in the line below -->
+
+                <div class="carousel-item" style="background-image: url({{random_post.image.url}})">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h3>{{random_post.title}}</h3>
+                        <p>{{random_post.summary}}</p>
+                        <a href="{% url 'contestPost' random_post.id %}">...more</a>
+                    </div>
                 </div>
-            </div>
-            <!-- Slide Three - Set the background image for this slide in the line below -->
-            <div class="carousel-item" style="background-image: url('http://placehold.it/1900x1080')">
-                <div class="carousel-caption d-none d-md-block">
-                    <h3>Third Slide</h3>
-                    <p>This is a description for the third slide.</p>
+                {% else %}
+                <!-- Slide Three - Set the background image for this slide in the line below -->
+                <div class="carousel-item" style="background-image: url('http://placehold.it/1900x1080')">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h3>Third Slide</h3>
+                        <p>This is a description for the third slide.</p>
+                    </div>
                 </div>
+
+                {% endif %}
             </div>
+
+            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+            {% endif %}
+
         </div>
-        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
-        </a>
-        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
-        </a>
 </header>
 
 {% endblock %}
@@ -66,41 +79,41 @@
 {% block main %}
 <main>
     <!-- 랜덤 게시글
-        {% if random_post %}
-        <br>
-        <div id="layoutSidenav_content">
-            <div class="container-fluid">
-                <div class="container">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">{{random_post.title}}</h5>
-                            <h6 class="card-subtitle mb-2 text-muted">{{random_post.created_at}}</h6>
-                            <p class="card-text"></p>
+    {% if random_post %}
+    <br>
+    <div id="layoutSidenav_content">
+        <div class="container-fluid">
+            <div class="container">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">{{random_post.title}}</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">{{random_post.created_at}}</h6>
+                        <p class="card-text"></p>
 
 
-                        </div>
-                    </div>
-
-                    <div class="card">
-                        <div class="card-header">
-                            랜덤 게시글
-                        </div>
-                        <div id='photocell'>
-                            {% if random_post.image %}
-                            <img src="{{random_post.image.url}}" alt="" id="photo">
-                            {% else %}
-                            <img src="{% static 'image/loading_fail.jpg' %}" alt="image_loading_fail" id="photo">
-                            {% endif %}
-                        </div>
-                        <div class="card-body">
-                            <h5 class="card-title">{{random_post.title}}</h5>
-                            <p class="card-text">{{random_post.summary}}</p>
-                            <a href="{% url 'contestPost' random_post.id %}" class="btn btn-primary">More</a>
-                        </div>
                     </div>
                 </div>
-                {% endif %}
-                <br> -->
+
+                <div class="card">
+                    <div class="card-header">
+                        랜덤 게시글
+                    </div>
+                    <div id='photocell'>
+                        {% if random_post.image %}
+                        <img src="{{random_post.image.url}}" alt="" id="photo">
+                        {% else %}
+                        <img src="{% static 'image/loading_fail.jpg' %}" alt="image_loading_fail" id="photo">
+                        {% endif %}
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">{{random_post.title}}</h5>
+                        <p class="card-text">{{random_post.summary}}</p>
+                        <a href="{% url 'contestPost' random_post.id %}" class="btn btn-primary">More</a>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+            <br> -->
 
     <!--게시글 테스트-->
     <br>
