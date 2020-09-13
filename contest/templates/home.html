@@ -4,8 +4,6 @@
 {% block header %}
 
 <head>
-
-    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -17,11 +15,13 @@
 
     <!-- Custom styles for this template -->
     <link href="{% static 'contest/css/modern-business.css' %}" rel="stylesheet">
-
+    
 </head>
+{% endblock %}
 
+{% block main %}
 
-<header>
+<main>
     <div class="container-fluid">
         {% if random_post %}
         <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
@@ -32,24 +32,28 @@
             </ol>
             <div class="carousel-inner" role="listbox">
                 <!-- Slide One - Set the background image for this slide in the line below -->
-                <div class="carousel-item active" style="background-image: url({{random_post.image.url}})">
+                
+                {% if random_post.image %}
+                <div class="carousel-item active" style="background-image: url('{{random_post.image}}')">
+                {% else %}
+                <div class="carousel-item active" style="background-image: url('{{ STATIC_URL }}image/loading_fail.jpg')">
+                {% endif %}
                     <div class="carousel-caption d-none d-md-block">
-                        {% if random_post.image %}
                         <h3>{{random_post.title}}</h3>
                         <p>{{random_post.summary}}</p>
-                        <a href="{% url 'contestPost' random_post.id %}">...more</a>
+                        <a href="{% url 'contestPost' random_post.id %}">...more</a>    
                     </div>
                 </div>
                 <!-- Slide Two - Set the background image for this slide in the line below -->
 
-                <div class="carousel-item" style="background-image: url({{random_post.image.url}})">
+                <div class="carousel-item" style="background-image: url('http://placehold.it/1900x1080')">
                     <div class="carousel-caption d-none d-md-block">
                         <h3>{{random_post.title}}</h3>
                         <p>{{random_post.summary}}</p>
                         <a href="{% url 'contestPost' random_post.id %}">...more</a>
                     </div>
                 </div>
-                {% else %}
+
                 <!-- Slide Three - Set the background image for this slide in the line below -->
                 <div class="carousel-item" style="background-image: url('http://placehold.it/1900x1080')">
                     <div class="carousel-caption d-none d-md-block">
@@ -57,8 +61,6 @@
                         <p>This is a description for the third slide.</p>
                     </div>
                 </div>
-
-                {% endif %}
             </div>
 
             <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -69,74 +71,38 @@
                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                 <span class="sr-only">Next</span>
             </a>
-            {% endif %}
-
         </div>
-</header>
+        {% endif %}
 
-{% endblock %}
-
-{% block main %}
-<main>
-    <!-- 랜덤 게시글
-    {% if random_post %}
-    <br>
-    <div id="layoutSidenav_content">
-        <div class="container-fluid">
-            <div class="container">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">{{random_post.title}}</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">{{random_post.created_at}}</h6>
-                        <p class="card-text"></p>
-
-
-                    </div>
-                </div>
-
-                <div class="card">
-                    <div class="card-header">
-                        랜덤 게시글
-                    </div>
-                    <div id='photocell'>
-                        {% if random_post.image %}
-                        <img src="{{random_post.image.url}}" alt="" id="photo">
-                        {% else %}
-                        <img src="{% static 'image/loading_fail.jpg' %}" alt="image_loading_fail" id="photo">
-                        {% endif %}
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title">{{random_post.title}}</h5>
-                        <p class="card-text">{{random_post.summary}}</p>
-                        <a href="{% url 'contestPost' random_post.id %}" class="btn btn-primary">More</a>
-                    </div>
-                </div>
-            </div>
-            {% endif %}
-            <br> -->
-
-    <!--게시글 테스트-->
-    <br>
-    <div class="container">
-        <h1 class="my-4">88한 심바의 공모전's</h1>
-        {% for post in posts.all %}
-        <div class="row">
-            <div class="col-lg-4 col-sm-6 portfolio-item">
-                <div class="card h-100">
-                    <a href="{% url 'contestPost' post.id %}"><img class="card-img-top"
-                            src="{% static 'image/loading_fail.jpg' %}" alt=""></a>
-                    <div class="card-body">
-                        <h5 class="card-title">
-                            <a href="{% url 'contestPost' post.id %}">{{post.title}}</a></h5>
-                        <h6 class="card-subtitle mb-2 text-muted">{{post.created_at}}</h6>
-                        <p class="card-text">{{post.summary}}</p>
-                    </div>
-                </div>
-            </div>
-        </div>
+        
         <br>
-        {% endfor %}
-    </div>
+        <!--게시글 테스트-->
+        <div class="container">
+            <h1 class="my-4">88한 심바의 공모전's</h1>
+            {% for post in posts.all %}
+            <div class="row">
+                <div class="col-lg-4 col-sm-6 portfolio-item">
+                    <div class="card h-100">
+                        <a href="{% url 'contestPost' post.id %}">
+                            {% if post.image %}
+                            <img class="card-img-top" src="{{post.image}}" alt="">
+                            {% else %}
+                            <img class="card-img-top" src="{% static 'image/loading_fail.jpg' %}" alt="">
+                            {% endif %}
+                        </a>
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                <a href="{% url 'contestPost' post.id %}">{{post.title}}</a></h5>
+                            <h6 class="card-subtitle mb-2 text-muted">{{post.created_at}}</h6>
+                            <p class="card-text">{{post.summary}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br>
+            {% endfor %}
+        </div>
+    
     </div>
 </main>
 
