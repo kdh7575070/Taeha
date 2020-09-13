@@ -85,7 +85,7 @@
                     <div class="card h-100">
                         <a href="{% url 'contestPost' post.id %}">
                             {% if post.image %}
-                            <img class="card-img-top" src="{{post.image}}" alt="">
+                            <img class="card-img-top" src="{{post.image.url}}" alt="">
                             {% else %}
                             <img class="card-img-top" src="{% static 'image/loading_fail.jpg' %}" alt="">
                             {% endif %}
@@ -106,7 +106,8 @@
     </div>
 </main>
 
+<!--
 <script src="{% static 'contest/vendor/jquery/jquery.min.js' %}"></script>
 <script src="{% static 'contest/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
-
+-->
 {% endblock %}
