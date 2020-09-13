@@ -36,7 +36,7 @@
                 {% if random_post.image %}
                 <div class="carousel-item active" style="background-image: url('{{random_post.image}}')">
                 {% else %}
-                <div class="carousel-item active" style="background-image: url('{{ STATIC_URL }}image/loading_fail.jpg')">
+                <div class="carousel-item active" style="background-image: url({% static 'image/loading_fail.jpg' %})">
                 {% endif %}
                     <div class="carousel-caption d-none d-md-block">
                         <h3>{{random_post.title}}</h3>
