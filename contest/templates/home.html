@@ -34,7 +34,7 @@
                 <!-- Slide One - Set the background image for this slide in the line below -->
                 
                 {% if random_post.image %}
-                <div class="carousel-item active" style="background-image: url('{{random_post.image}}')">
+                <div class="carousel-item active" style="background-image: url('{{random_post.image.url}}')">
                 {% else %}
                 <div class="carousel-item active" style="background-image: url({% static 'image/loading_fail.jpg' %})">
                 {% endif %}
