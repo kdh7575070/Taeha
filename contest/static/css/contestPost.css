@@ -56,3 +56,10 @@ textarea::placeholder {
     border: solid white !important;
     border-radius: 0.25rem;
 }
+
+
+.container-fluid{
+    margin-bottom: 5% ;
+    padding-left: 10rem !important;
+    padding-right: 10rem !important;
+}

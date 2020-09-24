@@ -13,6 +13,7 @@
     font-size: x-large;
 }
 
-#writenav{
+
+#writenav .nav-link{
     margin-left: 100px !important;
 }

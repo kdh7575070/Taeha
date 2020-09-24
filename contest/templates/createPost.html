@@ -9,66 +9,77 @@
     <title>createPost</title>
     <link rel="stylesheet" href="{% static 'css/createPost.css' %}">
     <!-- <script src="{% static 'js/createPost.js' %}"></script> -->
+    <style>
+        .container-fluid {
+            margin-bottom: 5%;
+            padding-top: 1rem !important;
+            padding-left: 10rem !important;
+            padding-right: 10rem !important;
+        }
+    </style>
 </head>
 {% endblock %}
 
 {% block main %}
 <main>
-    <script src="../js/createPost.js"></script>
-    <div id="title">
-        <form action="{% url 'create' %}" enctype="multipart/form-data" method="POST">
-            {% csrf_token %}
+    <div class="container-fluid">
+        <script src="../js/createPost.js"></script>
+        <div id="title">
+            <form action="{% url 'create' %}" enctype="multipart/form-data" method="POST">
+                {% csrf_token %}
 
-            <input type="text" name="title" placeholder="공모전 제목" style="width:100%; border: none;">
+                <input type="text" name="title" placeholder="공모전 제목" style="width:100%; border: none;">
+                <br>
+        </div>
+
+        <div id="article">
+            <textarea rows=20 name="content" placeholder="공모전에 대한 설명을 구체적으로 작성해주세요."
+                style="width:100%; border: none;"></textarea>
             <br>
-    </div>
+        </div>
 
-    <div id="article">
-        <textarea rows=20 name="content" placeholder="공모전에 대한 설명을 구체적으로 작성해주세요."
-            style="width:100%; border: none;"></textarea>
-        <br>
-    </div>
+        <div id="image" class="upload">
+            <label for="upload">사진 업로드</>
+                <input class="form-control" id="upload" type="file" name="image" style="border: 1px solid #012840;">
+                <br>
+        </div>
 
-    <div id="image" class="upload">
-        <label for="upload">사진 업로드</>
-            <input class="form-control" id="upload" type="file" name="image" style="border: 1px solid #012840;">
+        <div id="date">
+            <label>시작 날짜</label>
+            <input class="form-control" type="date" placeholder="start_date" name="start_date"
+                style="border: 1px solid #012840;">
             <br>
+            <label>마감 날짜</label>
+            <input class="form-control" type="date" placeholder="end_date" name="end_date"
+                style="border: 1px solid #012840;">
+            <br>
+        </div>
+
+        <div id='category'>
+            <label>카테고리</label>
+            <input type="checkbox" name="category[]" id="category1" value="카테고리1" class="category">마케팅 및 영업홍보
+            <input type="checkbox" name="category[]" id="category2" value="카테고리2" class="category">경영관리
+            <input type="checkbox" name="category[]" id="category3" value="카테고리3" class="category">기술전수
+            <br>
+        </div>
+
+        <div id="prize">
+            <label>경품종류</label>
+            <input type="radio" name="prize_type" id="prize_type1" value="경품종류1" class="prize">현금
+            <input type="radio" name="prize_type" id="prize_type2" value="경품종류2" class="prize">상품권
+            <input type="radio" name="prize_type" id="prize_type3" value="경품종류3" class="prize">상품
+            <br>
+
+            <label>총 상금액</label>
+            <input type='number' name='total_prize' style="margin-left: 50px;">
+        </div>
+
+        <div id="submit">
+            <input class="btn btn-outline-dark" type="submit" value="제출하기">
+        </div>
+        </form>
     </div>
 
-    <div id="date">
-        <label>시작 날짜</label>
-        <input class="form-control" type="date" placeholder="start_date" name="start_date"
-            style="border: 1px solid #012840;">
-        <br>
-        <label>마감 날짜</label>
-        <input class="form-control" type="date" placeholder="end_date" name="end_date"
-            style="border: 1px solid #012840;">
-        <br>
-    </div>
-
-    <div id='category'>
-        <label>카테고리</label>
-        <input type="checkbox" name="category[]" id="category1" value="카테고리1" class="category">마케팅 및 영업홍보
-        <input type="checkbox" name="category[]" id="category2" value="카테고리2" class="category">경영관리
-        <input type="checkbox" name="category[]" id="category3" value="카테고리3" class="category">기술전수
-        <br>
-    </div>
-
-    <div id="prize">
-        <label>경품종류</label>
-        <input type="radio" name="prize_type" id="prize_type1" value="경품종류1" class="prize">현금          
-        <input type="radio" name="prize_type" id="prize_type2" value="경품종류2" class="prize">상품권    
-        <input type="radio" name="prize_type" id="prize_type3" value="경품종류3" class="prize">상품
-        <br>
-
-        <label>총 상금액</label>
-        <input type='number' name='total_prize' style="margin-left: 50px;">
-    </div>
-
-    <div id="submit">
-        <input class="btn btn-outline-dark" type="submit" value="제출하기">
-    </div>
-    </form>
 </main>
 
 {% endblock %}

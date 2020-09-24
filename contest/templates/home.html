@@ -74,31 +74,31 @@
         </div>
         {% endif %}
 
-            <br>
+        <br>
         <!--게시글 테스트-->
-
-        <div class="container-fluid">
-
-            <div class="row">
-                {% for post in posts.all %}
-                <div class="col-4">
-                    <p></p>
-                    <div class="card">
-                        <a href="{% url 'contestPost' post.id %}">
-                            {% if post.image %}
-                            <img class="card-img-top" src="{{post.image.url}}" alt="" id="photo">
-                            {% else %}
-                            <img class="card-img-top" src="{% static 'image/loading_fail.jpg' %}" alt="" id="photo">
-                            {% endif %}
-                        </a>
+        
+        <h4>개최 중인 공모전</h4>
+        <div class="row">
+            {% for post in posts.all %}
+            <div class="col-4">
+                <p></p>
+                
+                
+                <div class="card">
+                    <a href="{% url 'contestPost' post.id %}">
+                        {% if post.image %}
+                        <img class="card-img-top" src="{{post.image.url}}" alt="" id="photo">
+                        {% else %}
+                        <img class="card-img-top" src="{% static 'image/loading_fail.jpg' %}" alt="" id="photo">
+                        {% endif %}
                         <div class="card-img-overlay">
-                            <h5 class="card-title"><a href="{% url 'contestPost' post.id %}">{{post.title}}</a></h5>
+                            <h5 class="card-title">{{post.title}}</h5>
                             <p class="card-text">{{post.summary}}</p>
                         </div>
-                    </div>
+                    </a>
                 </div>
-                {% endfor %}
             </div>
+            {% endfor %}
         </div>
     </div>
 </main>
