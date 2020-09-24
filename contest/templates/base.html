@@ -32,8 +32,10 @@
             경영관리
         </a>
         <a class="nav-link" href="{% url 'category' c_name='카테고리3' %}">
-            기술전수(디자인, 설계, 코딩 등)
-        </a>z
+            기술전수
+        </a>
+        <a class="nav-link" href="{% url 'createPost' %}" id="writenav">
+        공모전 주최하기</a>
 
 
         <!-- Navbar Search-->
@@ -60,8 +62,7 @@
                     {% if user.is_authenticated %}
                     <a class="dropdown-item" href="#">안녕하세요, {{user.get_username}}님</a>
                     <a class="dropdown-item" href="{% url 'mypage' %}">Mypage</a>
-                    <a class="dropdown-item" href="{% url 'createPost' %}">게시물 쓰기</a>
-                    <div class="dropdown-divider"></div>
+                    <!-- <div class="dropdown-divider"></div> -->
                     <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
                     {% else %}
                     <a class="dropdown-item" href="{% url 'login' %}">Login</a>
