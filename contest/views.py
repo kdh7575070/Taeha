@@ -46,13 +46,25 @@ def create(request):
 #홈페이지
 def home(request):
     posts = Post.objects
-    
-    if posts.exists():
-        random = random_post()
-    else:
-        random = None
+    post_list=list(Post.objects.all())
 
-    return render(request,'home.html',{'posts':posts, 'random_post':random})  
+    random_post = None
+    random_items = None
+    items_range = None
+    random.shuffle(post_list)
+    if posts.exists():
+        if len(post_list) == 1:
+            random_post= post_list[0]
+        elif len(post_list) < 5:
+            random_post= post_list[0]
+            random_items= post_list[1:]
+        else:
+            random_post = post_list[0]
+            random_items = post_list[1:5]
+    
+    if random_items is not None:
+        items_range = range(1, len(random_items)+1)
+    return render(request,'home.html',{'posts':posts, 'random_post':random_post, 'random_items':random_items, 'items_range':items_range})  
 
 #공모전 게시글
 def contestPost(request, post_id):
@@ -65,14 +77,15 @@ def contestPost(request, post_id):
     else:
         state="Favorites_Unregistered"
     #좋아요버튼
-    
+    num = post.like_count
+
     comments = Comment.objects.all().filter(post = post)
     
     participate_idea = Idea.objects.filter(post = post, i_writer = user).first()
     if participate_idea is not None:
-        return render(request,'contestPost.html' ,{'post':post, 'state':state, 'comments':comments, 'categories':categories, 'participate_idea': participate_idea})
+        return render(request,'contestPost.html' ,{'post':post, 'state':state, 'comments':comments, 'categories':categories, 'participate_idea': participate_idea, 'num':num})
 
-    return render(request,'contestPost.html' ,{'post':post, 'state':state, 'comments':comments, 'categories':categories})
+    return render(request,'contestPost.html' ,{'post':post, 'state':state, 'comments':comments, 'categories':categories, 'num':num})
 
 #공모전 개최자 페이지
 def hostPage(request):
@@ -198,11 +211,6 @@ def category(request, c_name):
     return render(request,'search.html' , {'category_posts': category_posts})
 
 
-def random_post():
-    post_list=list(Post.objects.all())
-    random.shuffle(post_list)
-    return post_list[0]
-
 def post_like(request, post_id):
     user = request.user # 로그인된 유저의 객체를 가져온다.
     post = get_object_or_404(Post, pk=post_id) # 좋아요 버튼을 누를 글을 가져온다.
@@ -210,15 +218,15 @@ def post_like(request, post_id):
     # 이미 좋아요를 눌렀다면 좋아요를 취소, 아직 안눌렀으면 좋아요를 누른다.
     if post.likes.filter(id=user.id): # 로그인한 user가 현재 post 객체에 좋아요를 눌렀다면
         post.likes.remove(user) # 해당 좋아요를 없앤다.
-        message="좋아요 취소"
+        state="Favorites_Registered"
     else: # 아직 좋아요를 누르지 않았다면
         post.likes.add(user) # 좋아요를 추가한다.
-        message="좋아요"
-
-        ret = {
-            'message' : message,
-            'num' : post.like_count(),
-        }
+        state="Favorites_Unregistered"
+        
+    ret = {
+        'state' : state,
+        'num' : post.like_count(),
+    }
 
     return HttpResponse(json.dumps(ret), content_type="application/json")
     
