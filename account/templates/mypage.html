@@ -18,7 +18,7 @@
 {% block main %}
 <main>
     <div class="container-fluid">
-        <h1 class="mt-4">&nbsp{{user}}님의 마이 페이지</h1>
+        <!-- <h1 class="mt-4">&nbsp{{user}}님의 마이 페이지</h1> -->
         <ol class="breadcrumb mb-4">
             <li class="breadcrumb-item active">회원정보</li>
             <!-- <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
@@ -32,9 +32,9 @@
                 <h5 class="card-text">이메일 : {{user.profile.email}}</h5>
             </div>
         </div>
-
+        <div style="margin-left: 89%;">
         <a href="{% url 'edituser' %}"><button type="button" class="btn btn-dark">회원정보수정</button><br><br></a>
-        
+        </div>
         <ol class="breadcrumb mb-4">
             <li class="breadcrumb-item"><a href="{% url 'likedPage' %}">관심있는 공모전</a></li>
         </ol>
@@ -52,7 +52,7 @@
                             <div class="small text-black">공모전 종료 일자 : {{post.end_date}}</div>
                         </div>
                         <div class="card-footer d-flex align-items-center justify-content-between">
-                            <a class="small text-black stretched-link" href="{% url 'contestPost' post.id %}">View Details</a>
+                            <a class="small text-black stretched-link" href="{% url 'contestPost' post.id %}">더보기</a>
                             <div class="small text-black"><i class="fas fa-angle-right"></i></div>
                         </div>
                     </div>
@@ -63,11 +63,11 @@
         <ul class="pagination justify-content-end">
             {% if like_posts.has_previous %}
             <li class="page-item">
-                <a class="page-link" href="?like_page={{like_posts.previous_page_number}}">Previous</a>
+                <a class="page-link" href="?like_page={{like_posts.previous_page_number}}">이전</a>
             </li>
             {% else %}
             <li class="page-item disabled">
-              <a class="page-link" href="#" tabindex="-1">Previous</a>
+              <a class="page-link" href="#" tabindex="-1">이전</a>
             </li>
             {% endif %}
 
@@ -83,11 +83,11 @@
 
             {% if like_posts.has_next %}
             <li class="page-item">
-                <a class="page-link" href="?like_page={{like_posts.next_page_number}}">Next</a>
+                <a class="page-link" href="?like_page={{like_posts.next_page_number}}">다음</a>
               </li>
             {% else %}
             <li class="page-item disabled">
-                <a class="page-link" href="#" tabindex="-1">Next</a>
+                <a class="page-link" href="#" tabindex="-1">다음</a>
               </li>
             {% endif %}
         </ul>
@@ -109,7 +109,7 @@
                             <div class="small text-black">공모전 종료 일자 : {{post.end_date}}</div>
                         </div>
                         <div class="card-footer d-flex align-items-center justify-content-between">
-                            <a class="small text-black stretched-link" href="{% url 'contestPost' post.id %}">View Details</a>
+                            <a class="small text-black stretched-link" href="{% url 'contestPost' post.id %}">더보기</a>
                             <div class="small text-black"><i class="fas fa-angle-right"></i></div>
                         </div>
                     </div>
@@ -120,11 +120,11 @@
         <ul class="pagination justify-content-end"">
             {% if participant_posts.has_previous %}
             <li class="page-item">
-                <a class="page-link" href="?participant_page={{participant_posts.previous_page_number}}">Previous</a>
+                <a class="page-link" href="?participant_page={{participant_posts.previous_page_number}}">이전</a>
             </li>
             {% else %}
             <li class="page-item disabled">
-              <a class="page-link" href="#" tabindex="-1">Previous</a>
+              <a class="page-link" href="#" tabindex="-1">이전</a>
             </li>
             {% endif %}
 
@@ -140,11 +140,11 @@
 
             {% if participant_posts.has_next %}
             <li class="page-item">
-                <a class="page-link" href="?participant_page={{participant_posts.next_page_number}}">Next</a>
+                <a class="page-link" href="?participant_page={{participant_posts.next_page_number}}">다음</a>
               </li>
             {% else %}
             <li class="page-item disabled">
-                <a class="page-link" href="#" tabindex="-1">Next</a>
+                <a class="page-link" href="#" tabindex="-1">다음</a>
               </li>
             {% endif %}
         </ul>
@@ -166,7 +166,7 @@
                             <div class="small text-black">공모전 종료 일자 : {{post.end_date}}</div>
                         </div>
                         <div class="card-footer d-flex align-items-center justify-content-between">
-                            <a class="small text-black stretched-link" href="{% url 'contestPost' post.id %}">View Details</a>
+                            <a class="small text-black stretched-link" href="{% url 'contestPost' post.id %}">더보기</a>
                             <div class="small text-black"><i class="fas fa-angle-right"></i></div>
                         </div>
                     </div>
@@ -177,11 +177,11 @@
         <ul class="pagination justify-content-end">
             {% if host_posts.has_previous %}
             <li class="page-item">
-                <a class="page-link" href="?host_page={{host_posts.previous_page_number}}">Previous</a>
+                <a class="page-link" href="?host_page={{host_posts.previous_page_number}}">이전</a>
             </li>
             {% else %}
             <li class="page-item disabled">
-              <a class="page-link" href="#" tabindex="-1">Previous</a>
+              <a class="page-link" href="#" tabindex="-1">이전</a>
             </li>
             {% endif %}
 
@@ -197,11 +197,11 @@
 
             {% if host_posts.has_next %}
             <li class="page-item">
-                <a class="page-link" href="?host_page={{host_posts.next_page_number}}">Next</a>
+                <a class="page-link" href="?host_page={{host_posts.next_page_number}}">다음</a>
               </li>
             {% else %}
             <li class="page-item disabled">
-                <a class="page-link" href="#" tabindex="-1">Next</a>
+                <a class="page-link" href="#" tabindex="-1">다음</a>
               </li>
             {% endif %}
         </ul>
