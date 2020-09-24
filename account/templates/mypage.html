@@ -17,7 +17,6 @@
             <!-- <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
             <li class="breadcrumb-item active">Charts</li> -->
         </ol>
-
         <div class="card">
             <div class="card-body">
                 <h3 class="card-title">회원 이름: {{user.profile.name}}</h3>
@@ -27,6 +26,8 @@
             </div>
         </div>
 
+        <a href="{% url 'edituser' %}"><button type="button" class="btn btn-dark">회원정보수정</button><br><br></a>
+        
         <ol class="breadcrumb mb-4">
             <li class="breadcrumb-item"><a href="{% url 'likedPage' %}">관심있는 공모전</a></li>
         </ol>
@@ -198,7 +199,7 @@
             {% endif %}
         </ul>
 
-        <a href="{% url 'edituser' %}"><button type="button" class="btn btn-dark">회원정보수정</button></a>
+        
     </div>
 </main>
 {% endblock %}

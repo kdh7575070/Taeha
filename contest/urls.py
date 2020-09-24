@@ -13,7 +13,8 @@ urlpatterns = [
     path('contestPost/editPost/<int:post_id>', contest.views.edit, name='editPost'),
     path('contestPost/update/<int:post_id>', contest.views.update, name='update'),
     path('contestPost/delete/<int:post_id>', contest.views.delete, name='delete'),
-    path('contestPost/post_like/<int:post_id>', contest.views.post_like, name='post_like'),
+    #path('contestPost/post_like/<int:post_id>', contest.views.post_like, name='post_like'),
+    path('contestPost/post/like', contest.views.post_like, name='post_like'),
     
     #Search
     path('search/',contest.views.search, name='search'),

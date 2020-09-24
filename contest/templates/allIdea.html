@@ -12,7 +12,7 @@
 {% block main %}
 <main>
     <div class="like">
-                <div id="id1"> "{{user}}"님이 올린 "{{post.title}}" 공모전의 아이디어 </div>
+                <div id="id1"> "{{post.manager.profile.name}}"님이 올린 {{post.title}} 공모전에 달린 아이디어 </div>
                 <br>
                 {% for idea in ideas %}
                     <br>
@@ -20,6 +20,7 @@
                         <div id="id2">아이디어 제목 : <a href="{% url 'contestIdea' post.id idea.id %}">{{idea.title}}</a></div>
                         <br>
                         <div id="id3">아이디어 내용 : {{idea.summary}}</div>
+                        <div id="id3">아이디어 작성자 : {{idea.i_writter}}</div>
                     </div>
                     <br>
                     <br>
