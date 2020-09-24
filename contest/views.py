@@ -73,9 +73,9 @@ def contestPost(request, post_id):
     categories = Category.objects.all().filter(post = post)
 
     if post.likes.filter(id=user.id):
-        state="Favorites_Registered"
+        message="Favorites_Registered"
     else:
-        state="Favorites_Unregistered"
+        message="Favorites_Unregistered"
     #좋아요버튼
     num = post.like_count
 
@@ -83,9 +83,9 @@ def contestPost(request, post_id):
     
     participate_idea = Idea.objects.filter(post = post, i_writer = user).first()
     if participate_idea is not None:
-        return render(request,'contestPost.html' ,{'post':post, 'state':state, 'comments':comments, 'categories':categories, 'participate_idea': participate_idea, 'num':num})
+        return render(request,'contestPost.html' ,{'post':post, 'message':message, 'comments':comments, 'categories':categories, 'participate_idea': participate_idea, 'num':num})
 
-    return render(request,'contestPost.html' ,{'post':post, 'state':state, 'comments':comments, 'categories':categories, 'num':num})
+    return render(request,'contestPost.html' ,{'post':post, 'message':message, 'comments':comments, 'categories':categories, 'num':num})
 
 #공모전 개최자 페이지
 def hostPage(request):
@@ -218,13 +218,13 @@ def post_like(request, post_id):
     # 이미 좋아요를 눌렀다면 좋아요를 취소, 아직 안눌렀으면 좋아요를 누른다.
     if post.likes.filter(id=user.id): # 로그인한 user가 현재 post 객체에 좋아요를 눌렀다면
         post.likes.remove(user) # 해당 좋아요를 없앤다.
-        state="Favorites_Registered"
+        message="Favorites_Registered"
     else: # 아직 좋아요를 누르지 않았다면
         post.likes.add(user) # 좋아요를 추가한다.
-        state="Favorites_Unregistered"
+        message="Favorites_Unregistered"
         
     ret = {
-        'state' : state,
+        'message' : message,
         'num' : post.like_count(),
     }
 

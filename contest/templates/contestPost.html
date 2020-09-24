@@ -19,19 +19,20 @@
                 },
                 dataType: "json",
                 success:function(response){
-                    console.log("작동")
-                    console.log(response.state);
-                    $("#like").replaceWith('<p id="like">'+response.state+'</p>'); 
+                    console.log(response.message);
+                    $("#like").replaceWith('<p id="like">'+response.message+'</p>'); 
                     $("#like_counting").replaceWith('<span id="like_counting">'+response.num+'</span>');
                 },
                 error : function(request, status, error){
                     alert("error");
+                    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error)
+
                 },
             });
         }
     </script>
 
-    <<style>
+    <style>
         .container-fluid{
             margin-bottom: 5% ;
             padding-top: 1rem !important;
@@ -76,9 +77,9 @@
                 <!--즐겨찾기 기능-->
                 <div style="display:flex; font-size: 1.5rem;" class="good">
                     <div class="goodicon" style="flex: 1 1 1; font-size: 1rem;">
-                        {% if state == 'Favorites_Registered' %}
+                        {% if message == 'Favorites_Registered' %}
                         <i class="xi-star xi-2x" style="color:#012840"></i>
-                        {% elif state == 'Favorites_Unregistered' %}
+                        {% elif message == 'Favorites_Unregistered' %}
                         <i class="xi-star-o xi-2x" ></i>
                         {% else %}
                         {% endif %}
@@ -88,15 +89,15 @@
 
                         <!-- <a href="{#% url 'post_like' post.id %#}" id="likes"> -->
                         <button onClick="like({{post.id}})">
-                            <p id ="like">{{state}}</p>
+                            <p id ="like">{{message}}</p>
                         </button>
-                            {% if state == 'Favorites_Registered' %}
+                            {% if message == 'Favorites_Registered' %}
                             즐겨찾기 취소
-                            {% elif state == 'Favorites_Unregistered' %}
+                            {% elif message == 'Favorites_Unregistered' %}
                             즐겨찾기 등록
                             {% else %}
                             {% endif %}
-                        </a>
+                        <!--</a>-->
                         &nbsp
                     </div>
                     <div class="goodnum">
