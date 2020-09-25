@@ -31,10 +31,18 @@
                 <h5 class="card-text">휴대폰 번호 : {{user.profile.number}}</h5>
                 <h5 class="card-text">이메일 : {{user.profile.email}}</h5>
             </div>
+<<<<<<< 802d08cc767137629d5940c9b63b67ee190d9bb0
         </div>
 
         <a href="{% url 'edituser' %}"><button type="button" class="btn btn-dark">회원정보수정</button><br><br></a>
         
+=======
+            
+            <div style="margin-left: 89%;">
+            <a href="{% url 'edituser' %}"><button type="button" class="btn btn-dark">회원정보수정</button><br><br></a>
+            </div>
+        </div>
+>>>>>>> nav바 수정,  채택 기능추가, 마이페이지 디자인 수정, 아이디어 페이지 디자인 수정
         <ol class="breadcrumb mb-4">
             <li class="breadcrumb-item"><a href="{% url 'likedPage' %}">관심있는 공모전</a></li>
         </ol>
@@ -60,7 +68,8 @@
             {% endfor %}
         </div>
 
-        <ul class="pagination justify-content-end">
+        {% if like_posts %}
+        <ul class="pagination justify-content-center">
             {% if like_posts.has_previous %}
             <li class="page-item">
                 <a class="page-link" href="?like_page={{like_posts.previous_page_number}}">Previous</a>
@@ -91,6 +100,7 @@
               </li>
             {% endif %}
         </ul>
+        {% endif %}
 
         <ol class="breadcrumb mb-4">
             <li class="breadcrumb-item"><a href="{% url 'participantPage' %}">참여한 공모전</a></li>
@@ -117,7 +127,8 @@
             {% endfor %}
         </div>
 
-        <ul class="pagination justify-content-end"">
+        {% if participant_posts %}
+        <ul class="pagination justify-content-center"">
             {% if participant_posts.has_previous %}
             <li class="page-item">
                 <a class="page-link" href="?participant_page={{participant_posts.previous_page_number}}">Previous</a>
@@ -148,6 +159,7 @@
               </li>
             {% endif %}
         </ul>
+        {% endif %}
 
         <ol class="breadcrumb mb-4">
             <li class="breadcrumb-item"><a href="{% url 'hostPage' %}">올린 공모전 목록</a></li>
@@ -174,7 +186,8 @@
             {% endfor %}
         </div>
 
-        <ul class="pagination justify-content-end">
+        {% if host_posts %}
+        <ul class="pagination justify-content-center">
             {% if host_posts.has_previous %}
             <li class="page-item">
                 <a class="page-link" href="?host_page={{host_posts.previous_page_number}}">Previous</a>
@@ -205,7 +218,7 @@
               </li>
             {% endif %}
         </ul>
-
+        {% endif %}
         
     </div>
 </main>

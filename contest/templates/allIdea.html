@@ -24,12 +24,19 @@
                 <br>
                 {% for idea in ideas %}
                     <br>
+                    <a href="{% url 'contestIdea' post.id idea.id %}">
                     <div class="box">
-                        <div id="id2">아이디어 제목 : <a href="{% url 'contestIdea' post.id idea.id %}">{{idea.title}}</a></div>
+                        <div id="id2">아이디어 제목 : {{idea.title}}
+                            
+                            {% if idea.selected == True %}
+                            (채택됨)</h7>
+                            {% endif %}
+                        </div>
                         <br>
                         <div id="id3">아이디어 내용 : {{idea.summary}}</div>
                         <div id="id3">아이디어 작성자 : {{idea.i_writter}}</div>
                     </div>
+                    </a>
                     <br>
                     <br>
                 {% endfor %}

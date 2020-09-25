@@ -18,6 +18,12 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"
         crossorigin="anonymous"></script>
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
+
+    <style>
+        #writenav{
+            margin-left: 28rem;
+        }
+    </style>
 </head>
 
 
@@ -25,16 +31,17 @@
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
         <a class="navbar-brand" href="{% url 'home' %}">THINKFARM</a>
         <a class="nav-link" href="{% url 'category' c_name='카테고리1' %}">
-            마케팅 및 영업홍보
+        마케팅 및 영업홍보
         </a>
         <a class="nav-link" href="{% url 'category' c_name='카테고리2' %}">
-            경영관리
+        경영관리
         </a>
         <a class="nav-link" href="{% url 'category' c_name='카테고리3' %}">
-            기술전수
+        기술전수
         </a>
         <a class="nav-link" href="{% url 'createPost' %}" id="writenav">
-        공모전 주최하기</a>
+        공모전 주최하기
+        </a>
 
 
         <!-- Navbar Search-->

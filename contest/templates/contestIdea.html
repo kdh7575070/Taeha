@@ -23,23 +23,28 @@
     <div class="container-fluid">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-text" style="width: 10%;
+                <h4 class="card-text" style="width: 15%;
                 border: 1px solid #f2f2f2 !important;
                 border-radius: 0.25rem;
-                padding: 1%;
+                padding: 0.5%;
                 background-color: #09649c;"><center><b>개인 정보</b></center></h4>
                 <h5 class="card-text">제출자 : {{idea.i_writer.profile.name}}</h5>
                 <h5 class="card-text">연락처 : {{idea.i_writer.profile.number}}</h5>
                 <h5 class="card-text">생년월일 : {{idea.i_writer.profile.birthday}}</h5>
                 <h5 class="card-text">이메일 : {{idea.i_writer.profile.email}}</h5><br>
 
-                <h4 class="card-text" style="width: 10%;
+                <h4 class="card-text" style="width: 15%;
                 border: 1px solid #f2f2f2 !important;
                 border-radius: 0.25rem;
-                padding: 1%;
+                padding: 0.5%;
                 background-color: #09649c;"><center><b>공모 정보</b></center></h4>
                 <h5 class="card-text">공모전 주제 : {{idea.post.title}}</h5>
-                <h5 class="card-text">아이디어 : {{idea.body}}</h5>
+                <h5 class="card-text" style="display:inline">아이디어 : {{idea.body}}</h5>
+                {% if idea.selected == True %}
+                <h7>(현재 채택된 아이디어입니다)</h7>
+                {% endif %}
+                
+                <br><br>
                 <p class="card-text">첨부된 이미지 :
                     <div id='photocell'>
                         {% if idea.image %}
@@ -51,6 +56,15 @@
                 </p>
                 <br>
                 <h6 class="card-subtitle mb-2 text-muted">내용 : {{idea.pub_date}}</h6>
+                
+                <a href="{% url 'allIdea' post.id%}">
+                    <button type="button" class="btn btn-dark" id="buttons">
+                        공모전에 등록된 다른 아이디어들
+                    </button></a>
+                {% if user == idea.post.manager or user.username == 'admin' %}
+                <a href="{%url 'selectI' post.id idea.id %}">
+                <button type="button" class="btn btn-light" id="buttons">채택하기</button></a>
+                {% endif %}
                 {% if user == idea.i_writer or user.username == 'admin' %}
                 <a href="{%url 'deleteI' post.id idea.id %}">
                     <button type="button" class="btn btn-light" id="buttons">삭제</button></a>
