@@ -121,7 +121,7 @@ a {
                     aria-haspopup="true" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
                     {% if user.is_authenticated %}
-                    <a class="dropdown-item" href="#" script="e.stopPropagation();">안녕하세요, {{user.get_username}}님</a>
+                    <a class="dropdown-item" href="#" escapeXml="true">안녕하세요, {{user.get_username}}님</a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="{% url 'mypage' %}">마이페이지</a>
                     <a class="dropdown-item" href="{% url 'logout' %}">로그아웃</a>

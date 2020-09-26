@@ -156,11 +156,6 @@
         -webkit-transition-delay: 0.35s;
         transition-delay: 0.35s;
     }
-
-    .text-box
-    {
-        color: #012480; 
-    }
 </style>
 
 {% endblock %}
@@ -168,6 +163,10 @@
 {% block main %}
 
 <main>
+    {% if user.is_authenticated %}
+    {% else %}
+    <script>alert("로그인 후 서비스를 이용하실 수 있습니다");</script>
+    {% endif %}
     <div class="container-fluid">
         {% if random_post %}
         <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">

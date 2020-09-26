@@ -51,7 +51,7 @@ textarea::placeholder {
     color:#012840;
     background-color: #F2F2F2 !important;
     border: solid white !important;
-    margin-left: 90%; 
+    margin-left: 92%; 
     margin-bottom: 2%;
 }
 
@@ -96,12 +96,11 @@ textarea::placeholder {
         <div class="card">
             <div class="card-body">
                 <h3 class="card-title">공모전 제목: {{post.title}}</h3>
-                <h6 class="card-subtitle mb-2 text-muted">내용 : {{post.updated_at}} by {{post.manager.profile.name}}</h6>
+                <h6 class="card-subtitle mb-2 text-muted">내용 : {{post.updated_at}} PCT by {{post.manager.profile.name}}</h6>
                 <br>
-                <h5 class="card-text">문의 이메일 : {{post.manager.profile.email}}</h5>
                 <p class="card-text">
 
-                    <pre class="card-text"><h4>내용 : {{post.content}}</h4><br></pre>
+                    <pre class="card-text" style="white-space: pre-wrap;"><h4>내용 : {{post.content}}</h4><br></pre>
 
                     <div id='photocell'>
                         {% if post.image %}
@@ -139,18 +138,16 @@ textarea::placeholder {
                 <p class="card-text">공모전 시작 날짜: {{post.start_date}}</p>
                 <p class="card-text">공모전 마감 날짜: {{post.end_date}}</p>
 
-                <p class="card-text">올린 날짜: {{post.created_at}}</p>
-                <p class="card-text">수정한 날짜: {{post.updated_at}}</p>
-
                 <p class="card-text">분야:
                     {% for category in categories %}
-                    {{category.category_name}},
+                    {{category.category_name}} &nbsp;
                     {% endfor %}
                 </p>
                 <p class="card-text">경품종류: {{post.prize_type}}</p>
                 <p class="card-text">총 상금: {{post.total_prize}}</p>
 
                 <p class="card-text">작성자 명: {{post.manager.profile.name}}</p>
+                <p class="card-text">문의 이메일 : {{post.manager.profile.email}}</p>
 
                 {% if user.is_authenticated %}
                 {% if post.manager != user %}
@@ -225,7 +222,7 @@ textarea::placeholder {
                         onsubmit="return comment_validation()">
                         {% csrf_token %}
                         <textarea placeholder="내용을 입력해주세요." rows=3 name="body" id="comment-value"></textarea>
-                        <input name="rp" class="btn btn-primary" type="submit" value="댓글 달기!" id="comment-button">
+                        <input name="rp" class="btn btn-primary" type="submit" value="댓글 달기" id="comment-button">
                     </form>
                 </div>
             </div>
