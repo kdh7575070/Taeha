@@ -16,7 +16,7 @@
 
     <style>
         .container-fluid {
-            margin-bottom: 5%;
+            margin-bottom: 15%;
             padding-top: 1rem !important;
             padding-left: 10rem !important;
             padding-right: 10rem !important;
@@ -59,11 +59,13 @@ textarea:focus {
 }
 
 .block_a{
-    width: 46.5%;
+    width: 45.5%;
+    border-radius: 10px;
 }
 
 .block_b{
-    width: 46.5%;
+    width: 45.5%;
+    border-radius: 10px;
 }
 
 .category {
@@ -235,26 +237,33 @@ textarea:focus {
 
         <div id='category'>
             <label>카테고리</label>
-            <input type="checkbox" name="category[]" id="category1" value="1" class="category">마케팅 및 홍보
-            <input type="checkbox" name="category[]" id="category2" value="2" class="category">기획 및 아이디어
-            <input type="checkbox" name="category[]" id="category3" value="3" class="category">로고 및 네이밍
+            <input type="checkbox" name="category[]" id="category1" value="마케팅 및 홍보" class="category">마케팅 및 홍보
+            <input type="checkbox" name="category[]" id="category2" value="기획 및 아이디어" class="category">기획 및 아이디어
+            <input type="checkbox" name="category[]" id="category3" value="로고 및 네이밍" class="category">로고 및 네이밍
             <br>
         </div>
 
             <div id="prize">
                 <label>경품종류</label>
-                <input type="radio" name="prize_type" id="prize_type1" value="경품종류1" class="prize">현금
-                <input type="radio" name="prize_type" id="prize_type2" value="경품종류2" class="prize">상품권
-                <input type="radio" name="prize_type" id="prize_type3" value="경품종류3" class="prize">상품
+                <input type="radio" name="prize_type" id="prize_type1" value="현금" class="prize">현금
+                <input type="radio" name="prize_type" id="prize_type2" value="상품권" class="prize">상품권
+                <input type="radio" name="prize_type" id="prize_type3" value="상품" class="prize">상품
                 <br>
 
                 <label>총 상금액</label>
                 <input type='number' id='total_prize' name='total_prize' style="margin-left: 50px;">
             </div>
 
-            <div id="submit">
-                <input class="btn btn-outline-dark" type="submit" value="제출하기">
+            <div class ="container">
+                <div id="check_message" style="margin: 40px; float:left">
+                    <h6 style>모든 필드를 채웠는지 확인해주세요</h6>
+                </div>
+    
+                <div id="submit" >
+                    <input class="btn btn-outline-dark" type="submit"float:right" value="제출하기">
+                </div>
             </div>
+            
         </form>
     
 
@@ -291,38 +300,31 @@ textarea:focus {
             var title = document.getElementById("title").value;
             var article= document.getElementById("article").value;
             var total_prize = document.getElementById("total_prize").value;
-            var prize_type = document.getElementsByName("prize_type").values;
-            var category = document.getElementsByName("category[]").values;
+            // var prize = document.getElementsByName("prize").values;
+            // var category = document.getElementsByClassName("category").values;
 
-            console.log(title);
-            console.log(article);
-            console.log(total_prize);
-            console.log(prize_type);
-            console.log(category);
+            var isSelected_one=0;
+            var isSelected_two=0;
+            // for (var i=0; i<3; i++){
+            //     var category = document.getElementsByClassName("category")[i];
+            //     if(category.checked ==true){
+            //         console.log("체크!")
+            //         isSelected_one=1;
+            //         break;
+            //     }
+            // }
 
-            var isSelected1=0;
-            var isSelected2=0;
-            for (var i=0; i<3; i++){
-                var category_type = document.getElementsByClassName("category")[i];
-                if(category_type.checked ==true){
-                    console.log("체크!")
-                    isSelected1=1;
-                    break;
-                }
-            }
-
-            for (var j=0; j<3; j++){
-                 var prize_type = document.getElementsByClassName("prize")[i];
-                 if(prize_type.checked==true){
-                     console.log("체크!")
-                     isSelected2=1;
-                     break;
-                }
-            }
+            // for (var j=0; j<3; j++){
+            //      var prize = document.getElementsByClassName("prize")[i];
+            //      if(prize.checked==true){
+            //          console.log("체크!")
+            //          isSelected_two=1;
+            //          break;
+            //     }
+            // }
             
-            var prize_type = document.getElementsByClassName("prize")[i]
    
-            if((title == '') || (article == "") || (total_prize == "") || isSelected1==0 || isSelected2==0){
+            if((title == '') || (article == "") || (total_prize == "") ){
                 alert("빈칸을 채워주세요!");
                 return false;
             }

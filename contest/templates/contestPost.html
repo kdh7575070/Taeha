@@ -112,29 +112,19 @@ textarea::placeholder {
                 <!--즐겨찾기 기능-->
                 
                 <div style="display:flex; font-size: 1.5rem;" class="good">
-                    <div class="goodicon" style="flex: 1 1 1; font-size: 1rem;">
-                        {% if message == '좋아요취소' %}
-                        <i id="heart" class="fas fa-heart"></i>
-                        {% elif message == '좋아요' %}
-                        <i id="heart" class="far fa-heart"></i>
-                        {% else %}
-                        {% endif %}
-                    </div>
-                    &nbsp
+                    
                     <div>
-
-                        <!-- <a href="{#% url 'post_like' post.id %#}" id="likes"> -->
                         <a onClick="like({{post.id}})">
-                            <p id ="like">{{message}}</p>
-                        </a>
-                            {% if message == 'Favorites_Registered' %}
-                            즐겨찾기 취소
-                            <i id="heart" class="fas fa-heart"></i>
+                            {% if message == '좋아요취소' %}
+                            <div id="heart" class="fas fa-heart" style="display:inline;"></div>
                             {% elif message == '좋아요' %}
-                            즐겨찾기 등록
+                            <div id="heart" class="far fa-heart" style="display:inline;"></div>
                             {% else %}
                             {% endif %}
-                        <!--</a>-->
+
+                            <p id ="like">{{message}}</p>
+                        
+                        </a>
                     </div>
                     <!-- <div class="goodnum"> -->
                         <!-- 해당 공모전에 관심 있어하는 사람 {{post.like_count}}명 -->
@@ -256,6 +246,10 @@ textarea::placeholder {
                     console.log(response.message);
                     $("#like").replaceWith('<p id="like">' + response.message + '</p>');
                     $("#like_counting").replaceWith('<span id="like_counting">' + response.num + '</span>');
+                    if(response.message == "좋아요")
+                        $("#heart").replaceWith('<div id="heart" class="far fa-heart" style="display:inline;"></div>');
+                    else if(response.message == "좋아요취소")
+                        $("#heart").replaceWith('<div id="heart" class="fas fa-heart" style="display:inline;"></div>');
                 },
                 error: function (request, status, error) {
                     alert("error");
