@@ -122,25 +122,23 @@ textarea::placeholder {
                     &nbsp
                     <div>
 
-
+                        <!-- <a href="{#% url 'post_like' post.id %#}" id="likes"> -->
                         <a onClick="like({{post.id}})">
-                            <p id="like" style="display:none">{{message}}</p>
-                            {% if message == '좋아요취소' %}
+                            <p id ="like">{{message}}</p>
+                        </a>
+                            {% if message == 'Favorites_Registered' %}
                             즐겨찾기 취소
                             <i id="heart" class="fas fa-heart"></i>
                             {% elif message == '좋아요' %}
                             즐겨찾기 등록
                             {% else %}
                             {% endif %}
-                        </a>
-             
-          
-                        &nbsp
+                        <!--</a>-->
                     </div>
-                    <div class="goodnum">
+                    <!-- <div class="goodnum"> -->
                         <!-- 해당 공모전에 관심 있어하는 사람 {{post.like_count}}명 -->
-                        <span id="like_counting">이 공모전을 {{post.like_count}}명이 지켜보고 있습니다.</span>
-                    </div>
+                        <!-- <span id="like_counting">이 공모전을 {{post.like_count}}명이 지켜보고 있습니다.</span> -->
+                    <!-- </div> -->
                 </div>
                 <br>
 
