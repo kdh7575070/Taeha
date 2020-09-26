@@ -31,15 +31,28 @@
 ### Members
 
 - 강태하([@kdh7575070](https://github.com/kdh7575070))
-
 - 김현진([@ki1029m](https://github.com/ki1029m))
-
 - 안준후([@Joonhu-An](https://github.com/Joonhu-An))
-
 - 양예지([@yeji0506](https://github.com/yeji0506))
-
 - 정소현([@thakd](https://github.com/thakd))
-
 - 정현철([@cheoleee](https://github.com/cheoleee))
-
 - 한현영([@h0han](https://github.com/h0han))
+
+
+
+## 📖 Usage
+
+**To run the project, perform the following command in terminal(according to your operating system).**
+
+```
+$ git clone https://github.com/h0han/Taeha.git
+
+$ python -m venv myvenv
+
+$ source venv/Scripts/activate # for Windows
+$ source venv/bin/activate # for mac or linux
+
+$ pip install -r requirements.txt
+
+$ python manage.py runserver
+```
