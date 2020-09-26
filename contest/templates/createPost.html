@@ -291,8 +291,8 @@ textarea:focus {
             var title = document.getElementById("title").value;
             var article= document.getElementById("article").value;
             var total_prize = document.getElementById("total_prize").value;
-            // var prize_type = document.getElementsByName("prize_type").values;
-            // var category = document.getElementsByName("category[]").values;
+            var prize_type = document.getElementsByName("prize_type").values;
+            var category = document.getElementsByName("category[]").values;
 
             console.log(title);
             console.log(article);
@@ -309,29 +309,20 @@ textarea:focus {
                     isSelected1=1;
                     break;
                 }
-                else{
-                    isSelected1=0;
-                    console.log("아님!")
-                }
             }
 
-            // for (var i=0; i<3; i++){
-            //     var prize_type = document.getElementsByClassName("prize_type")[i];
-            //     if(prize_type.checked==true){
-            //         console.log("체크!")
-            //         isSelected2=1;
-            //         break;
-            //     }
-            //     else{
-            //         isSelected2=0;
-            //         console.log("아님!")
-            //     }
-            // }
-
+            for (var j=0; j<3; j++){
+                 var prize_type = document.getElementsByClassName("prize")[i];
+                 if(prize_type.checked==true){
+                     console.log("체크!")
+                     isSelected2=1;
+                     break;
+                }
+            }
             
             var prize_type = document.getElementsByClassName("prize")[i]
    
-            if((title == '') || (article == "") || (total_prize == "")){
+            if((title == '') || (article == "") || (total_prize == "") || isSelected1==0 || isSelected2==0){
                 alert("빈칸을 채워주세요!");
                 return false;
             }

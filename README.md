@@ -2,7 +2,7 @@
 
 ## 👨‍🏫 Introduction
 
-### THINKFARM
+### BTS(Business To Students)
 
 - **소상공인 공모 플랫폼**
 - 소상공인에게 컨설팅의 접근성을 낮추고, 대학생에게 다양한 실무 경험을 돕는 서비스
