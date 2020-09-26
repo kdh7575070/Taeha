@@ -3,28 +3,72 @@
 <!DOCTYPE html>
 <html lang="en">
 
-{% block header %}
-{% endblock %}
 
+
+    
 <head>
+
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
+    
+    
+    
+
     <link href='{% static "contest/css/styles.css" %}' rel="stylesheet" />
     <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet"
         crossorigin="anonymous" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"
         crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="{% static 'css/base.css' %}">
 
+        
+    
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'contest/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="{% static 'contest/css/modern-business.css' %}" rel="stylesheet">
+        
+    
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
     <style>
-        #writenav{
-            margin-left: 28rem;
-        }
+        
+.sb-nav-fixed {
+    padding-top: 0px !important;
+}
+
+.bg-dark {
+    background-color: #012840 !important;
+}
+.sb-sidenav-dark {
+    background-color: #012840 !important;
+}
+.sb-sidenav-footer {
+    background-color: #012840 !important;
+}
+.test
+{
+    font-family: sans-serif;
+    font-size: x-large;
+}
+#writenav{
+    margin-left: 27rem !important;
+}
+
+a {
+    color: #012840;
+}
+
     </style>
+    
+    
+    {% block header %}
+    {% endblock %}
 </head>
+
+
 
 
 <body class="sb-nav-fixed">
