@@ -248,10 +248,10 @@ def post_like(request):
         # 이미 좋아요를 눌렀다면 좋아요를 취소, 아직 안눌렀으면 좋아요를 누른다.
         if post.likes.filter(id=user.id).exists(): # 로그인한 user가 현재 post 객체에 좋아요를 눌렀다면
             post.likes.remove(user) # 해당 좋아요를 없앤다.
-            message="좋아요취소"
+            message="좋아요"
         else: # 아직 좋아요를 누르지 않았다면
             post.likes.add(user) # 좋아요를 추가한다.
-            message="좋아요"
+            message="좋아요취소"
             
         ret = {
             'message' : message,
