@@ -132,8 +132,8 @@ def edit(request, post_id):
     for post_category in post_categories :
         post_category_list.append(post_category.category_name)
 
-    categories = ['카테고리1', '카테고리2','카테고리3']
-    prize_types = ['경품종류1','경품종류2','경품종류3']
+    categories = ['마케팅 및 홍보', '기획 및 아이디어','로고 및 네이밍']
+    prize_types = ['현금','상품권','상품']
 
     return render(request, 'editPost.html', {'post':post,
                                             'post_category_list':post_category_list,
@@ -235,8 +235,8 @@ def category(request, c_name):
 def post_like(request):
 
     if request.is_ajax():
-        post_id = request.GET['post_id'] #좋아요를 누른 게시물id가지고 오기
-        post = Post.objects.get(id=post_id) 
+        blog_id = request.GET['post_id'] #좋아요를 누른 게시물id가지고 오기
+        post = Post.objects.get(id=blog_id) 
 
         user = request.user # 로그인된 유저의 객체를 가져온다.     
         
@@ -248,10 +248,10 @@ def post_like(request):
         # 이미 좋아요를 눌렀다면 좋아요를 취소, 아직 안눌렀으면 좋아요를 누른다.
         if post.likes.filter(id=user.id).exists(): # 로그인한 user가 현재 post 객체에 좋아요를 눌렀다면
             post.likes.remove(user) # 해당 좋아요를 없앤다.
-            message="좋아요"
+            message="좋아요취소"
         else: # 아직 좋아요를 누르지 않았다면
             post.likes.add(user) # 좋아요를 추가한다.
-            message="좋아요취소"
+            message="좋아요"
             
         ret = {
             'message' : message,
