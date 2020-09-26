@@ -24,7 +24,7 @@
         margin-bottom: 2rem;
     }
 
-    .col-4 {
+    .col-3 {
         margin: 10px 0px;
     }
 
@@ -55,7 +55,7 @@
 
     figure.snip1200 img {
         width: 100%;
-        height: 100%;
+        height: 200px;
         position: relative;
         opacity: 0.9;
         border-radius: 1%;
@@ -221,7 +221,7 @@
                 <h4>진행 중인 공모전</h4>
                 <div class="row">
                     {% for post in posts.all %}
-                    <div class="col-4">
+                    <div class="col-3">
                         <figure class="snip1200">
                             {% if post.image %}
                             <img src="{{post.image.url}}" alt="">

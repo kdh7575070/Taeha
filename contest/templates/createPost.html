@@ -47,9 +47,8 @@ textarea:focus {
 }
 
 .date {
-    margin: 40px;
-    box-sizing: border-box;
-
+    margin: 40px auto;
+    text-align: center; 
 }
 
 #category {
@@ -57,6 +56,14 @@ textarea:focus {
     padding: 10px;
     border: 1px solid #012840;
     border-radius: 10px;
+}
+
+.block_a{
+    width: 46.5%;
+}
+
+.block_b{
+    width: 46.5%;
 }
 
 .category {
@@ -121,7 +128,6 @@ textarea:focus {
     <script>
         window.onload = $(function () {
             fn_default_datepicker();
-            console.log("111");
         });
 
         function fn_default_datepicker() {
@@ -141,8 +147,8 @@ textarea:focus {
                 , monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'] //달력의 월 부분 Tooltip 텍스트
                 , dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'] //달력의 요일 부분 텍스트
                 , dayNames: ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'] //달력의 요일 부분 Tooltip 텍스트
-                , minDate: "-6M" //최소 선택일자(-1D:하루전, -1M:한달전, -1Y:일년전)
-                , maxDate: "0M" //최대 선택일자(+1D:하루후, -1M:한달후, -1Y:일년후)                
+                , minDate: "0M" //최소 선택일자(-1D:하루전, -1M:한달전, -1Y:일년전)
+                , maxDate: "+1Y" //최대 선택일자(+1D:하루후, -1M:한달후, -1Y:일년후)                
             });
 
             var end = $("#datepicker_end").datepicker({
@@ -160,14 +166,14 @@ textarea:focus {
                 , monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'] //달력의 월 부분 Tooltip 텍스트
                 , dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'] //달력의 요일 부분 텍스트
                 , dayNames: ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'] //달력의 요일 부분 Tooltip 텍스트
-                , minDate: "-6M" //최소 선택일자(-1D:하루전, -1M:한달전, -1Y:일년전)
-                , maxDate: "0M" //최대 선택일자(+1D:하루후, -1M:한달후, -1Y:일년후)
+                , minDate: "0M" //최소 선택일자(-1D:하루전, -1M:한달전, -1Y:일년전)
+                , maxDate: "+1Y" //최대 선택일자(+1D:하루후, -1M:한달후, -1Y:일년후)
                 , defaultDate: "+1w"
             });
 
             //초기값을 오늘 날짜로 설정
-            $('#datepicker_start').datepicker('setDate', '-7D'); //(-1D:하루전, -1M:한달전, -1Y:일년전), (+1D:하루후, -1M:한달후, -1Y:일년후)
-            $('#datepicker_end').datepicker('setDate', 'today'); //(-1D:하루전, -1M:한달전, -1Y:일년전), (+1D:하루후, -1M:한달후, -1Y:일년후)
+            $('#datepicker_start').datepicker('setDate', 'today'); //(-1D:하루전, -1M:한달전, -1Y:일년전), (+1D:하루후, -1M:한달후, -1Y:일년후)
+            $('#datepicker_end').datepicker('setDate', '+7D'); //(-1D:하루전, -1M:한달전, -1Y:일년전), (+1D:하루후, -1M:한달후, -1Y:일년후)
         }
 
         function getDate(element) {
@@ -180,6 +186,8 @@ textarea:focus {
             }
             return date;
         }
+
+        
     </script>
 {% endblock %}
 
@@ -187,41 +195,41 @@ textarea:focus {
 <main>
     <div class="container-fluid">
         <script src="../js/createPost.js"></script>
-        <div id="title">
-            <form action="{% url 'create' %}" enctype="multipart/form-data" method="POST">
-                {% csrf_token %}
+        <form action="{% url 'create' %}" enctype="multipart/form-data" method="POST" >
+            {% csrf_token %}
+            <div id="title">
 
-                <input type="text" name="title" placeholder="공모전 제목" style="width:100%; border: none;">
-                <br>
-        </div>
-
-        <div id="article">
-            <textarea rows=20 name="content" placeholder="공모전에 대한 설명을 구체적으로 작성해주세요."
-                style="width:100%; border: none;"></textarea>
-            <br>
-        </div>
-
-        <div id="image" class="upload">
-            <label for="upload">사진 업로드</>
-                <input class="form-control" id="upload" type="file" name="image" style="border: 1px solid #012840;">
-                <br>
-        </div>
-
-        <div class="date">
-            <div class="block_a">
-                <label>시작 날짜</label>
-                <input class="form-control" type="text" placeholder="start_date" name="start_date"
-                style="border: 1px solid #012840;" id="datepicker_start" >
+                    <input type="text" name="title" placeholder="공모전 제목" style="width:100%; border: none;">
+                    <br>
             </div>
 
-            <div class="block_b">
-                <label>마감 날짜</label>
-                <input class="form-control" type="text" placeholder="end_date" name="end_date"
-                style="border: 1px solid #012840;" id="datepicker_end" >
-
+            <div id="article">
+                <textarea rows=20 name="content" placeholder="공모전에 대한 설명을 구체적으로 작성해주세요."
+                    style="width:100%; border: none;"></textarea>
+                <br>
             </div>
-        </div>
-        
+
+            <div id="image" class="upload">
+                <label for="upload">사진 업로드</>
+                    <input class="form-control" id="upload" type="file" name="image" style="border: 1px solid #012840;">
+                    <br>
+            </div>
+
+            <div class="date">
+                <div class="block_a" style="display: inline-block; vertical-align: top;">
+                    <label>시작 날짜</label>
+                    <input class="form-control" type="text" placeholder="start_date" name="start_date"
+                    style="border: 1px solid #012840;" id="datepicker_start" >
+                </div>
+
+                <div class="block_b" style="display: inline-block; vertical-align: top;">
+                    <label>마감 날짜</label>
+                    <input class="form-control" type="text" placeholder="end_date" name="end_date"
+                    style="border: 1px solid #012840;" id="datepicker_end" >
+
+                </div>
+            </div>
+            
 
         <div id='category'>
             <label>카테고리</label>
@@ -231,20 +239,20 @@ textarea:focus {
             <br>
         </div>
 
-        <div id="prize">
-            <label>경품종류</label>
-            <input type="radio" name="prize_type" id="prize_type1" value="경품종류1" class="prize">현금
-            <input type="radio" name="prize_type" id="prize_type2" value="경품종류2" class="prize">상품권
-            <input type="radio" name="prize_type" id="prize_type3" value="경품종류3" class="prize">상품
-            <br>
+            <div id="prize">
+                <label>경품종류</label>
+                <input type="radio" name="prize_type" id="prize_type1" value="경품종류1" class="prize">현금
+                <input type="radio" name="prize_type" id="prize_type2" value="경품종류2" class="prize">상품권
+                <input type="radio" name="prize_type" id="prize_type3" value="경품종류3" class="prize">상품
+                <br>
 
-            <label>총 상금액</label>
-            <input type='number' name='total_prize' style="margin-left: 50px;">
-        </div>
+                <label>총 상금액</label>
+                <input type='number' id='total_prize' name='total_prize' style="margin-left: 50px;">
+            </div>
 
-        <div id="submit">
-            <input class="btn btn-outline-dark" type="submit" value="제출하기">
-        </div>
+            <div id="submit">
+                <input class="btn btn-outline-dark" type="submit" value="제출하기" onclick="blank_check();">
+            </div>
         </form>
 
         
@@ -270,7 +278,18 @@ textarea:focus {
                  var end = $("#datepicker_end").val();
              });    
         });
-         
+
+        function blank_check()
+        {
+            var temp = document.getElementById("total_prize").value;
+            if(temp == ""){
+                alert("빈칸을 채워주세요!");
+            }
+            else{
+                location.href("{% url 'create' %}");
+                alert("등록되었습니다");
+            }
+        }
     </script>
 </main>
 
