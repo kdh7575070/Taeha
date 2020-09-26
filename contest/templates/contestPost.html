@@ -141,7 +141,7 @@ textarea::placeholder {
 
                 <p class="card-text">분야:
                     {% for category in categories %}
-                    {{category.category_name}}
+                    {{category.category_name}},
                     {% endfor %}
                 </p>
                 <p class="card-text">경품종류: {{post.prize_type}}</p>
