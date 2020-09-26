@@ -5,6 +5,8 @@
 
 <head>
     <title>contestPost</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
     <link rel="stylesheet" href="{% static 'css/contestPost.css' %}">
     <style>
         .card{
@@ -75,10 +77,20 @@ textarea::placeholder {
     </style>
 </head>
 {% endblock %}
-
 {% block main %}
-<main>
 
+    <main>
+    <!-- 오류 메세지 테스트-->
+    {% if message %}
+    <div id="message" style="display:none;">{{message}}</div>
+    <!-- <script>
+        var messageVar = document.getElementById("message").innerHTML;
+        function Alert() {
+            alert(messageVar)
+        }
+        Alert()
+    </script> -->
+    {% endif %}
     <div class="container-fluid">
         <div class="card">
             <div class="card-body">
@@ -97,29 +109,32 @@ textarea::placeholder {
                 </p>
 
                 <!--즐겨찾기 기능-->
+                
                 <div style="display:flex; font-size: 1.5rem;" class="good">
                     <div class="goodicon" style="flex: 1 1 1; font-size: 1rem;">
-                        {% if message == 'Favorites_Registered' %}
-                        <i class="xi-star xi-2x" style="color:#012840"></i>
-                        {% elif message == 'Favorites_Unregistered' %}
-                        <i class="xi-star-o xi-2x" ></i>
+                        {% if message == '좋아요취소' %}
+                        <i id="heart" class="fas fa-heart"></i>
+                        {% elif message == '좋아요' %}
+                        <i id="heart" class="far fa-heart"></i>
                         {% else %}
                         {% endif %}
                     </div>
                     &nbsp
                     <div>
 
-                        <!-- <a href="{#% url 'post_like' post.id %#}" id="likes"> -->
-                        <button onClick="like({{post.id}})">
-                            <p id ="like">{{message}}</p>
-                        </button>
-                            {% if message == 'Favorites_Registered' %}
+
+                        <a onClick="like({{post.id}})">
+                            <p id="like" style="display:none">{{message}}</p>
+                            {% if message == '좋아요취소' %}
                             즐겨찾기 취소
-                            {% elif message == 'Favorites_Unregistered' %}
+                            <i id="heart" class="fas fa-heart"></i>
+                            {% elif message == '좋아요' %}
                             즐겨찾기 등록
                             {% else %}
                             {% endif %}
-                        <!--</a>-->
+                        </a>
+             
+          
                         &nbsp
                     </div>
                     <div class="goodnum">
@@ -148,13 +163,15 @@ textarea::placeholder {
                 {% if user.is_authenticated %}
                 {% if post.manager != user %}
                 <br>
-                <a href="{% url 'createIdea' post.id %}"><button type="button" class="btn btn-dark" id="buttons">아이디어 제출</button></a>
-                {% if participate_idea %}
-                <a href="{% url 'contestIdea' post.id participate_idea.id%}"><button type="button"
-                        class="btn btn-dark" id="buttons">참여한 아이디어</button></a>
-                {% endif%}
-                {% else %}
-                <a href="{% url 'allIdea' post.id%}"> <button type="button" class="btn btn-dark" id="buttons">공모전에 등록된 아이디어들
+                <a href="{% url 'createIdea' post.id %}"><button type="button" class="btn btn-dark" id="buttons">아이디어
+                    제출</button></a>
+            {% if participate_idea %}
+            <a href="{% url 'contestIdea' post.id participate_idea.id%}"><button type="button" class="btn btn-dark"
+                    id="buttons">참여한 아이디어</button></a>
+            {% endif%}
+            {% else %}
+            <a href="{% url 'allIdea' post.id%}"> <button type="button" class="btn btn-dark" id="buttons">공모전에 등록된
+                    아이디어들
                     </button></a>
                 <br>
                 {% endif %}
@@ -210,15 +227,16 @@ textarea::placeholder {
         </div>
         {% endfor %}
         <br>
-
-        <!--댓글 달기-->
-        <div class="comment">
-            <form method='POST' action="{% url 'comment_create' post.id %}">
-                {% csrf_token %}
-                <textarea placeholder="내용을 입력해주세요." rows= 3 name="body"></textarea>
-                <input class="btn btn-primary" type="submit" value="댓글 달기" id="comment-button">
-            </form>
-        </div>
+                <!--댓글 달기-->
+                <div class="comment">
+                    <form name="comment" method='POST' action="{% url 'comment_create' post.id %}"
+                        onsubmit="return comment_validation()">
+                        {% csrf_token %}
+                        <textarea placeholder="내용을 입력해주세요." rows=3 name="body" id="comment-value"></textarea>
+                        <input name="rp" class="btn btn-primary" type="submit" value="댓글 달기!" id="comment-button">
+                    </form>
+                </div>
+            </div>
     </div>
 
     
@@ -248,6 +266,17 @@ textarea::placeholder {
                 },
             });
         }
+        function comment_validation() {
+            const content = document.getElementById('comment-value').value;
+            //console.log(content)
+            if (content == '') {
+                alert('빈칸을 입력해주세요');
+                return false
+            }
+            else {
+                return true
+            }
+        };
     </script>
 </main>
 {% endblock %}
