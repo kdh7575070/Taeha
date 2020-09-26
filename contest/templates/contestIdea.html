@@ -4,7 +4,7 @@
 {% block header %}
 
     <title>contestIdea</title>
-    <link rel="stylesheet" href="{% static 'css/contestIdea.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/contestidea.css' %}">
     <style>
         .container-fluid{
             margin-bottom: 5% ;
@@ -38,6 +38,17 @@
     margin-top: 1%;
 }
 
+#card_p{
+    border-bottom: dashed ;
+}
+
+#card_i{
+    display: flex;
+    justify-content: space-around;
+}
+
+
+
     </style>
 {% endblock %}
 
@@ -46,21 +57,18 @@
     <div class="container-fluid">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-text" style="width: 15%;
-                border: 1px solid #f2f2f2 !important;
-                border-radius: 0.25rem;
-                padding: 0.5%;
-                background-color: #09649c;"><center><b>개인 정보</b></center></h4>
-                <h5 class="card-text">제출자 : {{idea.i_writer.profile.name}}</h5>
-                <h5 class="card-text">연락처 : {{idea.i_writer.profile.number}}</h5>
-                <h5 class="card-text">생년월일 : {{idea.i_writer.profile.birthday}}</h5>
-                <h5 class="card-text">이메일 : {{idea.i_writer.profile.email}}</h5><br>
-
-                <h4 class="card-text" style="width: 15%;
-                border: 1px solid #f2f2f2 !important;
-                border-radius: 0.25rem;
-                padding: 0.5%;
-                background-color: #09649c;"><center><b>공모 정보</b></center></h4>
+                <div id="card_p">
+                    <h4 class="card-text"><center><b>개인 정보</b></center></h4><br>
+                    <div id="card_i">
+                        <h5 class="card-text">제출자 : {{idea.i_writer.profile.name}}</h5><br>
+                        <h5 class="card-text">연락처 : {{idea.i_writer.profile.number}}</h5><br>
+                        <h5 class="card-text">생년월일 : {{idea.i_writer.profile.birthday}}</h5><br>
+                        <h5 class="card-text">이메일 : {{idea.i_writer.profile.email}}</h5><br>
+                    </div>
+                    <br>
+                </div>
+                <br>
+                <h4 class="card-text"><center><b>공모 정보</b></center></h4>
                 <h5 class="card-text">공모전 주제 : {{idea.post.title}}</h5>
                 <h5 class="card-text" style="display:inline">아이디어 : {{idea.body}}</h5>
                 {% if idea.selected == True %}
