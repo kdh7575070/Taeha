@@ -9,7 +9,7 @@
         div:hover {
             color: #0583F2;
         }
-    </style>
+    </style>    
 {% endblock %}
 
 {% block main %}
@@ -23,7 +23,11 @@
             {% for post in post_search.all %}
             <a href="{%url 'contestPost' post.id%}" style="text-decoration: none;">
                 <div id="post">
-                    <img src="/static/image/loading_fail.jpg" style="width: 20rem; height: 20rem;">
+                    {% if post.image %}
+                    <img src="{{post.image.url}}" style="width: 20rem; height: 20rem;">
+                    {% else %}
+                    <img src="{% static 'image/loading_fail.jpg' %}" style="width: 20rem; height: 20rem;">
+                    {% endif %}
                     <div id="post_item">
                         <b>{{post.title}}</b>
                     </div>
@@ -46,7 +50,12 @@
 
             <div id="category">
                 <a href="{%url 'contestPost' category_post.id%}" style="text-decoration: none;">
-                    <img src="/static/image/loading_fail.jpg" style="width: 20rem; height: 20rem;">
+                    
+                    {% if category_post.image %}
+                    <img src="{{category_post.image.url}}" style="width: 20rem; height: 20rem;">
+                    {% else %}
+                    <img src="{% static 'image/loading_fail.jpg' %}" style="width: 20rem; height: 20rem;">
+                    {% endif %}
                     <div id="category_item">
                         <b>{{category_post.title}}</b>
                     </div>

@@ -6,6 +6,7 @@
 <head>
     <title>contestPost</title>
     <link rel="stylesheet" href="{% static 'css/contestPost.css' %}">
+    
     <script>
         function like(post_id){
 
@@ -103,17 +104,6 @@ textarea::placeholder {
 
 {% block main %}
 <main>
-    <!-- 오류 메세지 테스트-->
-    {% if message %}
-    <div id="message" style="display:none;">{{message}}</div>
-    <script>
-        var messageVar = document.getElementById("message").innerHTML;
-        function Alert() {
-            alert(messageVar)
-        }
-        Alert()
-    </script>
-    {% endif %}
 
     <div class="container-fluid">
         <div class="card">
