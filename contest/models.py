@@ -28,7 +28,7 @@ class Post(models.Model):
         )
     
     def summary(self):
-        return self.content[:100]
+        return self.content[:30]
 
     def __str__(self):
         return self.title
