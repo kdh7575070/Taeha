@@ -30,4 +30,6 @@ urlpatterns = [
     path('contestPost/<int:post_id>/allIdea', contest.views.allIdea, name='allIdea'),
     path('contestPost/<int:post_id>/contestIdea/<int:idea_id>', contest.views.contestIdea, name='contestIdea'),
     path('contestPost/<int:post_id>/deleteI/<int:idea_id>', contest.views.deleteI, name='deleteI'),
+    path('contestPost/<int:post_id>/selectI/<int:idea_id>', contest.views.selectI, name='selectI'),
+    
 ]

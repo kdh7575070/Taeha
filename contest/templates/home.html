@@ -3,21 +3,50 @@
 
 {% block header %}
 
-<head>
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
     <title>Modern Business - Start Bootstrap Template</title>
-
-    <!-- Bootstrap core CSS -->
-    <link href="{% static 'contest/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
-
-    <!-- Custom styles for this template -->
-    <link href="{% static 'contest/css/modern-business.css' %}" rel="stylesheet">
+    
     <link rel="stylesheet" href="{% static 'css/home.css' %}">
+    
+    <style>
 
-</head>
+.container{
+    flex-direction: column;
+    display: flex;
+}
+
+.container-fluid{
+    margin-bottom: 5% !important;
+    padding-top: 1rem !important;
+    padding-left: 10rem !important;
+    padding-right: 10rem !important;
+}
+
+#carouselExampleIndicators{
+    margin-bottom: 2rem ;
+}
+
+.col-4{
+    margin: 10px 0px;
+}
+
+.card {
+    margin: 0px 0px;
+    text-align: center;
+    width: 100% ;
+    height: 100% ;
+}
+
+.card-img-top{
+    width: 100% !important; 
+    height: 200px !important;
+}
+
+.card-img-overlay{
+    width: 100%;
+    height: 100%;
+}
+    </style>
+    
 {% endblock %}
 
 {% block main %}

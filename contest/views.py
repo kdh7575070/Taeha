@@ -309,3 +309,17 @@ def deleteI(request, post_id, idea_id):
     #post_id=idea.post.id
     idea.delete()
     return redirect('/contestPost/'+str(post_id))
+
+
+def selectI(request, post_id, idea_id):
+    idea=get_object_or_404(Idea, pk=idea_id)
+    post=get_object_or_404(Post, pk=post_id)
+    pre_selected_idea = None
+    pre_selected_idea = Idea.objects.filter(post=post, selected=True).first()
+    if pre_selected_idea is not None:
+        pre_selected_idea.selected = False
+        pre_selected_idea.save()
+    
+    idea.selected = True
+    idea.save()
+    return render(request,'contestIdea.html',{'post':post , 'idea':idea} )

@@ -2,18 +2,73 @@
 {% load static %}
 
 {% block header %}
-<head>
+
     <title>All Idea</title>
     <link rel="stylesheet" href="{% static 'css/allIdea.css' %}">
     <style>
-        .container-fluid{
-            margin-bottom: 5% ;
-            padding-top: 1rem !important;
-            padding-left: 10rem !important;
-            padding-right: 10rem !important;
-        }
+.container-fluid{
+    margin-bottom: 5% ;
+    padding-top: 1rem !important;
+    padding-left: 10rem !important;
+    padding-right: 10rem !important;
+}
+.bg-dark {
+    background-color: #012840 !important;
+}
+.sb-sidenav-dark {
+    background-color: #012840;
+}
+#id1{
+    color: #012840;
+    font-size:xx-large;
+    font-family: 'Roboto';
+    src: url('../fonts/Roboto-Light-webfont.woff');
+    font-weight: 300;
+    font-style: normal;
+    text-align: center;
+    margin-top: 60px;
+   
+}
+#id2{
+    color:#012840;
+    font-family: 'Roboto';
+    src: url('../fonts/Roboto-Light-webfont.woff');
+    font-weight: 300;
+    font-style: normal;
+    text-align: center;
+    font-size:large;
+}
+#id3{
+    color:#012840;
+    font-family: 'Roboto';
+    src: url('../fonts/Roboto-Light-webfont.woff');
+    font-weight: 300;
+    font-style: normal;
+    text-align: center;
+}
+#id4{
+    color:#012840;
+    font-family: 'Roboto';
+    src: url('../fonts/Roboto-Light-webfont.woff');
+    font-weight: 300;
+    font-style: normal;
+    text-align: center;
+}
+.box{
+    border:5px solid #012840; 
+    padding:20px;
+    width: 800px;
+    height: 200px;
+    box-sizing: border-box;
+    margin-left: auto;
+    margin-right: auto;
+    overflow-x: hidden;
+    
+}
+.box:hover{
+    background-color: #F2F2F2; 
+}
     </style>
-</head>
 
 {% endblock %}
 
@@ -24,12 +79,19 @@
                 <br>
                 {% for idea in ideas %}
                     <br>
+                    <a href="{% url 'contestIdea' post.id idea.id %}">
                     <div class="box">
-                        <div id="id2">아이디어 제목 : <a href="{% url 'contestIdea' post.id idea.id %}">{{idea.title}}</a></div>
+                        <div id="id2">아이디어 제목 : {{idea.title}}
+                            
+                            {% if idea.selected == True %}
+                            (채택됨)</h7>
+                            {% endif %}
+                        </div>
                         <br>
                         <div id="id3">아이디어 내용 : {{idea.summary}}</div>
                         <div id="id3">아이디어 작성자 : {{idea.i_writter}}</div>
                     </div>
+                    </a>
                     <br>
                     <br>
                 {% endfor %}

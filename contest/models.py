@@ -58,6 +58,8 @@ class Idea(models.Model):
     body=models.TextField()
     image=models.ImageField(upload_to='imagesI/', null=True)
     
+    selected=models.BooleanField(default= False , blank=True, null=False)
+
     i_writer=models.ForeignKey(User, on_delete=models.CASCADE, null=True)#작성자 정보
     post = models.ForeignKey(Post, on_delete = models.CASCADE, null=True)#연결된포스트
 
