@@ -6,35 +6,6 @@
 <head>
     <title>contestPost</title>
     <link rel="stylesheet" href="{% static 'css/contestPost.css' %}">
-    
-    <script>
-        function CatDelete() {
-          location.replace("/delete/{{post_id}}");
-        }
-        function like(post_id){
-
-            $.ajax({
-                type : "POST",
-                url : "post/like/",
-                data : {
-                    'post_id' : post_id,
-                    'csrfmiddlewaretoken' : '{{csrf_token}}',
-                },
-                dataType: "json",
-                success:function(response){
-                    console.log(response.message);
-                    $("#like").replaceWith('<p id="like">'+response.message+'</p>'); 
-                    $("#like_counting").replaceWith('<span id="like_counting">'+response.num+'</span>');
-                },
-                error : function(request, status, error){
-                    alert("error");
-                    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error)
-
-                },
-            });
-        }
-    </script>
-
     <style>
         .card{
     margin-top: 3% !important;
@@ -190,24 +161,19 @@ textarea::placeholder {
                 {% endif %}
 
                 {% if user == post.manager or user.username == 'admin' %}
-                <a href="{% url 'delete' cat.id %}">Delete<ion-icon name="trash"></ion-icon></a>
-                <a href="#" data-toggle="modal" data-target="#CatModal">Delete<ion-icon name="trash"></ion-icon></a>
-
-                <!-- {%url 'delete' post.id %} -->
-                <!-- <a href="{%url 'delete' post.id %}"><button type="button" class="btn btn-light" id="buttons">삭제</button></a> -->
-                <a href="#" data-toggle="modal" data-target="#CatModal">삭제<ion-icon name="trash"></ion-icon></a>
+                <a href="#" data-toggle="modal" data-target="#CatModal"><button type="button" class="btn btn-light" id="buttons">삭제</button><ion-icon name="trash"></ion-icon></a>
 
                 <div id="CatModal" class="modal" tabindex="-1" role="dialog">
                     <div class="modal-dialog" role="document">
                       <div class="modal-content">
                         <div class="modal-header">
-                          <h5 class="modal-title">UOSCAT</h5>
+                          <h5 class="modal-title">알림</h5>
                           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                           </button>
                         </div>
                        <div class="modal-body">
-                          <p>진짜로 내용을 삭제하시겠습니까?</p>
+                          <p>내용을 삭제하시겠습니까?</p>
                        </div>
                        <div class="modal-footer">
                           <button onclick="CatDelete()" type="button" class="btn btn-primary">삭제하기</button>
@@ -250,9 +216,38 @@ textarea::placeholder {
             <form method='POST' action="{% url 'comment_create' post.id %}">
                 {% csrf_token %}
                 <textarea placeholder="내용을 입력해주세요." rows= 3 name="body"></textarea>
-                <input class="btn btn-primary" type="submit" value="댓글 달기!" id="comment-button">
+                <input class="btn btn-primary" type="submit" value="댓글 달기" id="comment-button">
             </form>
         </div>
     </div>
+
+    
+    <script>
+        function CatDelete() {
+          location.replace("/contestPost/delete/{{post.id}}");
+        }
+        function like(id) {
+
+            $.ajax({
+                url: "{%url 'post_like' %}",
+                data: {
+                    'post_id': id,
+                    'csrfmiddlewaretoken': '{{csrf_token}}',
+                },
+                dataType: "json",
+                success: function (response) {
+                    console.log(response.message);
+                    $("#like").replaceWith('<p id="like">' + response.message + '</p>');
+                    $("#like_counting").replaceWith('<span id="like_counting">' + response.num + '</span>');
+                },
+                error: function (request, status, error) {
+                    alert("error");
+                    alert("code:" + request.status + "\n" + "message:" + request.responseText + "\n" +
+                        "error:" + error)
+
+                },
+            });
+        }
+    </script>
 </main>
 {% endblock %}

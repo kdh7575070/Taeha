@@ -211,28 +211,55 @@ def category(request, c_name):
     return render(request,'search.html' , {'category_posts': category_posts})
 
 
-def post_like(request, post_id):
-    user = request.user # 로그인된 유저의 객체를 가져온다.
-    post = get_object_or_404(Post, pk=post_id) # 좋아요 버튼을 누를 글을 가져온다.
+# def post_like(request, post_id):
+#     user = request.user # 로그인된 유저의 객체를 가져온다.
+#     post = get_object_or_404(Post, pk=post_id) # 좋아요 버튼을 누를 글을 가져온다.
 
-    # 이미 좋아요를 눌렀다면 좋아요를 취소, 아직 안눌렀으면 좋아요를 누른다.
-    if post.likes.filter(id=user.id): # 로그인한 user가 현재 post 객체에 좋아요를 눌렀다면
-        post.likes.remove(user) # 해당 좋아요를 없앤다.
-        message="Favorites_Registered"
-    else: # 아직 좋아요를 누르지 않았다면
-        post.likes.add(user) # 좋아요를 추가한다.
-        message="Favorites_Unregistered"
+#     # 이미 좋아요를 눌렀다면 좋아요를 취소, 아직 안눌렀으면 좋아요를 누른다.
+#     if post.likes.filter(id=user.id): # 로그인한 user가 현재 post 객체에 좋아요를 눌렀다면
+#         post.likes.remove(user) # 해당 좋아요를 없앤다.
+#         message="Favorites_Registered"
+#     else: # 아직 좋아요를 누르지 않았다면
+#         post.likes.add(user) # 좋아요를 추가한다.
+#         message="Favorites_Unregistered"
         
-    ret = {
-        'message' : message,
-        'num' : post.like_count(),
-    }
+#     ret = {
+#         'message' : message,
+#         'num' : post.like_count(),
+#     }
 
-    return HttpResponse(json.dumps(ret), content_type="application/json")
+#     return HttpResponse(json.dumps(ret), content_type="application/json")
     
-    # redirect('/contestPost/'+str(post.id))
+#     # redirect('/contestPost/'+str(post.id))
 
+def post_like(request):
 
+    if request.is_ajax():
+        blog_id = request.GET['post_id'] #좋아요를 누른 게시물id가지고 오기
+        post = Post.objects.get(id=blog_id) 
+
+        user = request.user # 로그인된 유저의 객체를 가져온다.     
+        
+        if not request.user.is_authenticated: #버튼을 누른 유저가 비로그인 유저일 때
+                message = "로그인을 해주세요" #화면에 띄울 메세지 
+                ret = {'like_count' : post.likes.count(),"message":message}
+                return HttpResponse(json.dumps(ret), content_type='application/json')
+
+        # 이미 좋아요를 눌렀다면 좋아요를 취소, 아직 안눌렀으면 좋아요를 누른다.
+        if post.likes.filter(id=user.id).exists(): # 로그인한 user가 현재 post 객체에 좋아요를 눌렀다면
+            post.likes.remove(user) # 해당 좋아요를 없앤다.
+            message="좋아요 취소"
+        else: # 아직 좋아요를 누르지 않았다면
+            post.likes.add(user) # 좋아요를 추가한다.
+            message="좋아요"
+            
+        ret = {
+            'message' : message,
+            'num' : post.likes.count(),
+        }
+
+        return HttpResponse(json.dumps(ret), content_type="application/json")
+        
 #댓글 관련
 def comment_create(request, post_id):
     if request.method == "POST":
