@@ -195,7 +195,7 @@ textarea:focus {
 <main>
     <div class="container-fluid">
         <script src="../js/createPost.js"></script>
-        <form action="{% url 'create' %}" enctype="multipart/form-data" method="POST" >
+        <form action="{% url 'create' %}" enctype="multipart/form-data" method="POST" onsubmit="return blank_check()">
             {% csrf_token %}
             <div id="title">
 
@@ -228,14 +228,16 @@ textarea:focus {
                     style="border: 1px solid #012840;" id="datepicker_end" >
 
                 </div>
+
+                
             </div>
             
 
         <div id='category'>
             <label>카테고리</label>
-            <input type="checkbox" name="category[]" id="category1" value="카테고리1" class="category">마케팅 및 홍보
-            <input type="checkbox" name="category[]" id="category2" value="카테고리2" class="category">기획 및 아이디어
-            <input type="checkbox" name="category[]" id="category3" value="카테고리3" class="category">로고 및 네이밍
+            <input type="checkbox" name="category[]" id="category1" value="1" class="category">마케팅 및 홍보
+            <input type="checkbox" name="category[]" id="category2" value="2" class="category">기획 및 아이디어
+            <input type="checkbox" name="category[]" id="category3" value="3" class="category">로고 및 네이밍
             <br>
         </div>
 
@@ -251,14 +253,19 @@ textarea:focus {
             </div>
 
             <div id="submit">
-                <input class="btn btn-outline-dark" type="submit" value="제출하기" onclick="blank_check();">
+                <input class="btn btn-outline-dark" type="submit" value="제출하기">
             </div>
         </form>
+    
 
         
     </div>
 
     <script>
+
+
+
+
         $(document).ready(function(){
             
             $("#datepicker_start").on("click",function(){
@@ -281,13 +288,56 @@ textarea:focus {
 
         function blank_check()
         {
-            var temp = document.getElementById("total_prize").value;
-            if(temp == ""){
+            var title = document.getElementById("title").value;
+            var article= document.getElementById("article").value;
+            var total_prize = document.getElementById("total_prize").value;
+            // var prize_type = document.getElementsByName("prize_type").values;
+            // var category = document.getElementsByName("category[]").values;
+
+            console.log(title);
+            console.log(article);
+            console.log(total_prize);
+            console.log(prize_type);
+            console.log(category);
+
+            var isSelected1=0;
+            var isSelected2=0;
+            for (var i=0; i<3; i++){
+                var category_type = document.getElementsByClassName("category")[i];
+                if(category_type.checked ==true){
+                    console.log("체크!")
+                    isSelected1=1;
+                    break;
+                }
+                else{
+                    isSelected1=0;
+                    console.log("아님!")
+                }
+            }
+
+            // for (var i=0; i<3; i++){
+            //     var prize_type = document.getElementsByClassName("prize_type")[i];
+            //     if(prize_type.checked==true){
+            //         console.log("체크!")
+            //         isSelected2=1;
+            //         break;
+            //     }
+            //     else{
+            //         isSelected2=0;
+            //         console.log("아님!")
+            //     }
+            // }
+
+            
+            var prize_type = document.getElementsByClassName("prize")[i]
+   
+            if((title == '') || (article == "") || (total_prize == "")){
                 alert("빈칸을 채워주세요!");
+                return false;
             }
             else{
-                location.href("{% url 'create' %}");
                 alert("등록되었습니다");
+                return true;
             }
         }
     </script>
