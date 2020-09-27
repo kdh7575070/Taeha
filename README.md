@@ -6,7 +6,7 @@
 
 - **소상공인 공모 플랫폼**
 - 소상공인에게 컨설팅의 접근성을 낮추고, 대학생에게 다양한 실무 경험을 돕는 서비스
-- [**서비스 보기**](https://github.com/kdh7575070/Taeha/blob/master/introduce/introduce.pdf)
+- [**서비스 보기**](http://kdh7575070.pythonanywhere.com/)
 
 
 
