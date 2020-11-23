@@ -9,7 +9,6 @@
 - [**서비스 보기**](http://kdh7575070.pythonanywhere.com/)
 
 
-
 ## 📅 Schedule
 
 | Date              | Contents        | Details                                             | etc  |
@@ -23,21 +22,6 @@
 | Sep, 22           | 온라인 컨설팅   | 서비스, 구현에 대한 컨설팅 및 피드백                |      |
 | Sep, 23 ~ 25      | 추가 구현       | 컨설팅 내용을 바탕으로 BM 수정, Front-end 추가 구현 |      |
 | Sep, 26           | **👨‍💻해커톤👩‍💻**  | at 경북대학교 IT 융복합관                           |      |
-
-
-
-## 🤖 TEAM : 88한 Simba
-
-### Members
-
-- 강태하([@kdh7575070](https://github.com/kdh7575070))
-- 김현진([@ki1029m](https://github.com/ki1029m))
-- 안준후([@Joonhu-An](https://github.com/Joonhu-An))
-- 양예지([@yeji0506](https://github.com/yeji0506))
-- 정소현([@thakd](https://github.com/thakd))
-- 정현철([@cheoleee](https://github.com/cheoleee))
-- 한현영([@h0han](https://github.com/h0han))
-
 
 
 ## 📖 Usage
